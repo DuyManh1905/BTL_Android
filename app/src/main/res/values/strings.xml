@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">BTL</string>
+
+    <string-array name="category">
+        <item>Học tập</item>
+        <item>Giải trí</item>
+        <item>Thể thao</item>
+        <item>Du lịch</item>
+        <item>Sức khỏe</item>
+    </string-array>
+
+</resources>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/option"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/ic_menu"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageView5"
+            android:layout_width="82dp"
+            android:layout_height="76dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/cat1" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/helloName"
+        android:layout_marginLeft="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Hello Mạnh"
+        android:textStyle="bold"
+        android:textSize="20dp" />
+    <TextView
+        android:id="@+id/nowDate"
+        android:layout_marginLeft="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Mei 27, 2024"/>
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search"
+        app:iconifiedByDefault="false"
+        app:queryHint="Find your task"
+        android:layout_margin="5dp"
+        android:background="@color/gray"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_margin="5dp"
+        android:layout_height="100dp"
+        android:background="@color/yellow"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="My Today Task"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/cntTask"
+            android:textSize="15dp"
+            android:textColor="@color/white"
+            android:layout_marginLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="-20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
+            android:id="@+id/recycleView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+</LinearLayout>

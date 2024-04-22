@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/mHome"
+        android:title="Home"
+        android:icon="@drawable/ic_button_home"/>
+
+    <item android:id="@+id/mSchedule"
+        android:title="Schedule"
+        android:icon="@drawable/ic_button_schedule"/>
+
+    <item android:id="@+id/mMess"
+        android:title="Mess"
+        android:icon="@drawable/ic_button_mess"/>
+
+    <item android:id="@+id/mUser"
+        android:title="User"
+        android:icon="@drawable/ic_button_user"/>
+</menu>

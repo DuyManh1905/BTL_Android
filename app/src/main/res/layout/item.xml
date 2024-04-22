@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="3dp"
+    app:cardCornerRadius="5dp"
+    android:background="@color/gray">
+
+    <LinearLayout
+        android:background="@color/item"
+        android:weightSum="4"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_marginLeft="10dp"
+                android:text="Di du lich Phu Quoc"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_marginTop="15dp"
+                android:id="@+id/tvCategory"
+                android:layout_marginLeft="10dp"
+                android:text="Du lich"
+                android:textSize="16dp"
+                android:textColor="@color/red"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:text="10:00 - 12:30 am"
+            android:layout_gravity="center"
+            android:textColor="@color/yellow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:text="14/4/2024"
+            android:layout_gravity="center"
+            android:textColor="@color/yellow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

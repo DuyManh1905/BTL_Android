@@ -6,11 +6,12 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
 import com.duymanh.btl.adapter.ViewPagerAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -27,6 +28,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        SharedPreferences prefs = getSharedPreferences("app_prefs", MODE_PRIVATE);
+        String userId = prefs.getString("user_id", null);
+        String username = prefs.getString("username", null);
+
+        if (userId != null && username != null) {
+            // Sử dụng thông tin người dùng
+            Log.d("User Info", "User ID: " + userId + ", Username: " + username);
+        }
 
         navigationView = findViewById(R.id.bottom_nav);
         viewPager = findViewById(R.id.viewPager);
@@ -85,25 +96,27 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
     }
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-
         super.onCreateContextMenu(menu, v, menuInfo);
-        if (v.getId() == R.id.imageView5) {
-            getMenuInflater().inflate(R.menu.logout_menu, menu);
-        } else if (v.getId() == R.id.option) {
-            getMenuInflater().inflate(R.menu.navigation, menu);
-        }
     }
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-
         if(item.getItemId()==R.id.logout){
-            Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+            SharedPreferences preferences = getSharedPreferences("app_prefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.clear();  // Xóa tất cả dữ liệu
+            editor.apply();  // Áp dụng thay đổi
+
+            // Chuyển về LoginActivity sau khi đăng xuất
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  // Đảm bảo người dùng không quay lại Activity trước đó
             startActivity(intent);
+            finish();  // Đóng Activity hiện tại
             return true;
         }
         return super.onContextItemSelected(item);

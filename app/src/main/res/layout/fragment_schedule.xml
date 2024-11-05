@@ -5,78 +5,67 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
+
+
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
         app:iconifiedByDefault="false"
-        app:queryHint="Enter title task"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <EditText
-        android:id="@+id/eFrom"
-        android:textSize="12dp"
-        android:hint="Enter start date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <EditText
-        android:id="@+id/eTo"
-        android:textSize="12dp"
-        android:hint="Enter end date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <LinearLayout
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="20dp"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Spinner
-            android:id="@+id/spCategory"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <Button
-            android:id="@+id/btSearch"
-            android:layout_weight="1"
-            android:background="@drawable/normal_button"
-            android:text="Search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-    <TextView
-        android:id="@+id/tvCount"
-        android:textColor="@color/yellow"
-        android:layout_marginLeft="20dp"
-        android:text="Have 2 task"
-        android:layout_marginBottom="20dp"
+        app:queryHint="Find your company"
+        android:background="#D0BAD6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/yellow"
+        android:layout_height="80dp"
+        android:background="@color/green_background"
         android:orientation="vertical">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:text="Danh sách công ty"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/black"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="start" />
+
+            <TextView
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:textColor="@color/green"
+                android:layout_marginTop="10dp"
+                android:text="Xem tất cả"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:gravity="end" />
+        </LinearLayout>
+
         <TextView
-            android:layout_marginTop="10dp"
-            android:textStyle="bold"
-            android:textSize="20dp"
-            android:text="My All Task "
-            android:layout_marginLeft="20dp"
+            android:id="@+id/cntTask"
+            android:textSize="15dp"
             android:textColor="@color/white"
+            android:layout_marginLeft="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
+
     </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="-20dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="10dp"
             android:id="@+id/recycleView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-    
+
 </LinearLayout>

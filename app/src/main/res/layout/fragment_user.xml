@@ -1,12 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <ImageView
-        android:src="@drawable/cat2"
+    <!-- Label cho Name -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name:"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:paddingTop="8dp"/>
+
+    <!-- EditText cho tên người dùng -->
+    <EditText
+        android:id="@+id/txtName"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:paddingBottom="8dp"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Label cho Username -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Username:"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:paddingTop="8dp"/>
+
+    <!-- EditText cho username -->
+    <EditText
+        android:id="@+id/txtUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:paddingBottom="8dp"/>
+
+    <!-- Label cho Email -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email:"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:paddingTop="8dp"/>
+
+    <!-- EditText cho email -->
+    <EditText
+        android:id="@+id/txtEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:paddingBottom="8dp"
+        android:inputType="textEmailAddress"/>
+
+    <!-- Label cho Birthdate -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Birthdate:"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:paddingTop="8dp"/>
+
+    <!-- EditText cho ngày sinh -->
+    <EditText
+        android:id="@+id/txtBirthdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:paddingBottom="8dp"
+        android:inputType="date"/>
+
+    <!-- Label cho Role -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Role:"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:paddingTop="8dp"/>
+
+    <!-- EditText cho vai trò -->
+    <EditText
+        android:id="@+id/txtRole"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:paddingBottom="8dp"/>
+
+    <Button
+        android:id="@+id/btnUpdate"
+        android:text="Update"
+        android:background="@color/blueIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"/>
+
+    <Button
+        android:id="@+id/btnLogOut"
+        android:text="Đăng xuất"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

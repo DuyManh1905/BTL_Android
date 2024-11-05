@@ -9,4 +9,6 @@
         <item>Sức khỏe</item>
     </string-array>
 
+    <string name="days_remaining">Còn <b>18</b> ngày để ứng tuyển</string>
+
 </resources>

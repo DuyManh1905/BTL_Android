@@ -39,4 +39,12 @@ dependencies {
 
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation ("androidx.core:core:1.6.0")
+
+
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    implementation("com.auth0.android:jwtdecode:2.0.0")
+    implementation ("com.google.android.material:material:1.8.0")
+
 }

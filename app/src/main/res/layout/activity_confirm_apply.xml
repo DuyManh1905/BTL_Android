@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="Thư giới thiệu"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:textSize="15dp"
+                android:textColorHint="@color/gray"
+                android:hint="Viết giới thiệu ngắn gọn về bản thân (điểm mạnh, điểm yếu) và nêu rõ mong muốn, lý do làm việc tại công ty này"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/rounded_border"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"/>
+
+            <TextView
+                android:layout_marginTop="30dp"
+                android:text="Lưu ý"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:text="1. Chúng tôi khuyên tất cả các bạn hãy luôn cẩn trọng trong quá trình tìm việc và chủ động nghiên cứu về thông tin công ty, vị trí việc làm trước khi ứng tuyển. Ứng viên cần có trách nhiệm với hành vi ứng tuyển của mình. Nếu bạn gặp phải tin tuyển dụng hoặc nhân được liên lạc đáng ngờ của nhà tuyển dụng hãy báo cáo ngay cho chúng tôi qua e mail duymanh@gmail.com để được hỗ trợ kịp thời.\n\n2.Tìm hiểu kinh nghiệm phòng tránh lừa đảo tại đây."
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:padding="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="20dp"
+        android:background="@android:color/white">
+        <ImageView
+            android:layout_width="58dp"
+            android:src="@drawable/round_bookmark_border_24"
+            android:layout_height="50dp"/>
+        <Button
+            android:id="@+id/btnApply"
+            android:textColor="@color/white"
+            android:background="@drawable/normal_button_green"
+            android:text="Ứng tuyển"
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</LinearLayout>

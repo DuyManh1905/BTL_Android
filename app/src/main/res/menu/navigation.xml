@@ -5,7 +5,7 @@
         android:icon="@drawable/ic_button_home"/>
 
     <item android:id="@+id/mSchedule"
-        android:title="Schedule"
+        android:title="Company"
         android:icon="@drawable/ic_button_schedule"/>
 
     <item android:id="@+id/mMess"

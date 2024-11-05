@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginBottom="2dp"
+    android:background="@drawable/rounded_border">
+
+    <ImageView
+        android:id="@+id/iconCompany"
+        android:layout_margin="20dp"
+        android:src="@drawable/company2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@android:color/white"
+        android:layout_marginBottom="8dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false">
+
+        <TextView
+            android:id="@+id/company_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Company Name"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
+
+
+        <TextView
+            android:id="@+id/company_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Company Address"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginTop="2dp" />
+
+        <TextView
+            android:id="@+id/company_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CompanyType"
+            android:textSize="14sp"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="2dp" />
+    </LinearLayout>
+</LinearLayout>

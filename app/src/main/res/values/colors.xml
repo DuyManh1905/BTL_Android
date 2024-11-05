@@ -11,4 +11,7 @@
     <color name="blueIcon">#4B7BE5</color>
     <color name="item">#CAD6EF</color>
     <color name="red">#C1463D</color>
+
+    <color name="gray_background">#ECE3E2</color>
+    <color name="green_background">#D0ECDC</color>
 </resources>

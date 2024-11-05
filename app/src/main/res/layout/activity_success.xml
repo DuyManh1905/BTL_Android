@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_gravity="center"
+                android:src="@drawable/ic_success"
+                android:layout_width="200dp"
+                android:layout_height="200dp"/>
+            <TextView
+                android:textSize="25sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Ứng tuyển công việc\nthành công"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:textColor="@color/green"
+                android:gravity="center"
+                android:text="Xem danh sách việc làm đã ứng tuyển"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:background="@drawable/rounded_border"
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="Cho phép chúng tôi gửi thông bảo để không bỏ lỡ tin nhắn từ nhà tuyển dụng."
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:textColor="@color/green"
+                    android:layout_marginTop="3dp"
+                    android:text="Bật thông báo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:background="@drawable/rounded_border"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:src="@drawable/ic_warning"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"/>
+                    <TextView
+                        android:layout_marginStart="5dp"
+                        android:text="Lưu ý"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:text="1. Chungs tôi khuyên tất cả các bạn hãy luôn cẩn trọng trong quá trình tìm việc và chủ động nghiên cứu về thông tin công ty, vị trí làm viêc trước khi tuyển dụng."
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:text="2. Ứng viên cần có trách nhiệm với hành vi ứng tuyển của mình. Nếu bạn gặp phải tin tuyển dụng hoặc nhận được liên lạc đáng ngờ của nhà tuyển dụng, hãy báo cáo ngay cho Chúng tôi qua email manh@gmail.com để được hỗ trợ kịp thời."
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:text="3. Tìm hiểu thêm kinh nghiệm phòng tránh lừa đảo tại đây"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:padding="10dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="20dp"
+        android:background="@android:color/white">
+        <Button
+            android:id="@+id/btnGoHome"
+            android:textColor="@color/white"
+            android:background="@drawable/normal_button_green"
+            android:text="Đóng"
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</LinearLayout>

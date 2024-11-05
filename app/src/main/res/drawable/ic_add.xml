@@ -11,7 +11,7 @@
 
     <!-- Dấu cộng -->
     <path
-        android:fillColor="@color/green"
+        android:fillColor="@color/black"
         android:pathData="M11,5V12H5a1,1 0,0 0,0 2h6v7a1,1 0,0 0,2 0v-7h6a1,1 0,0 0,0 -2h-6V5a1,1 0,0 0,-1 -1Z"/>
 
 </vector>

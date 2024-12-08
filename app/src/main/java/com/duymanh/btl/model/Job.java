@@ -8,24 +8,55 @@ public class Job implements Serializable {
     private String startAt;
     private String endAt;
     private String desciption;
+    private String form;
+    //so luong tuyen
+    private int numberRecruitment;
+    //cap bac
+    private String ranking;
+
+    //dia diem lam viec
+    private String area;
+
+    //thoi gian lam viec
+    private String time;
     private String salary;
     private Company company;
     private CateJob cateJob;
     private JobRequirement jobRequirement;
 
+    //quyen loi
+    private String interest;
+
     // Getters and Setters
 
 
-    public Job(int id, String title, String startAt, String endAt, String desciption, String salary, Company company, CateJob cateJob, JobRequirement jobRequirement) {
+    public Job() {
+    }
+
+    public Job(int id, String title, String startAt, String endAt, String desciption, String form, int numberRecruitment, String ranking, String area, String time, String salary, Company company, CateJob cateJob, JobRequirement jobRequirement, String interest) {
         this.id = id;
         this.title = title;
         this.startAt = startAt;
         this.endAt = endAt;
         this.desciption = desciption;
+        this.form = form;
+        this.numberRecruitment = numberRecruitment;
+        this.ranking = ranking;
+        this.area = area;
+        this.time = time;
         this.salary = salary;
         this.company = company;
         this.cateJob = cateJob;
         this.jobRequirement = jobRequirement;
+        this.interest = interest;
+    }
+
+    public String getInterest() {
+        return interest;
+    }
+
+    public void setInterest(String interest) {
+        this.interest = interest;
     }
 
     public int getId() {
@@ -66,6 +97,46 @@ public class Job implements Serializable {
 
     public void setDesciption(String desciption) {
         this.desciption = desciption;
+    }
+
+    public String getForm() {
+        return form;
+    }
+
+    public void setForm(String form) {
+        this.form = form;
+    }
+
+    public int getNumberRecruitment() {
+        return numberRecruitment;
+    }
+
+    public void setNumberRecruitment(int numberRecruitment) {
+        this.numberRecruitment = numberRecruitment;
+    }
+
+    public String getRanking() {
+        return ranking;
+    }
+
+    public void setRanking(String ranking) {
+        this.ranking = ranking;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getSalary() {

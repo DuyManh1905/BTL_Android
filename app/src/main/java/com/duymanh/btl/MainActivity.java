@@ -28,8 +28,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
         SharedPreferences prefs = getSharedPreferences("app_prefs", MODE_PRIVATE);
         String userId = prefs.getString("user_id", null);
         String username = prefs.getString("username", null);

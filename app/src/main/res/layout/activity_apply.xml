@@ -427,10 +427,15 @@
                 android:paddingBottom="4dp" />
 
             <TextView
-                android:id="@+id/tvCompany"
+                android:id="@+id/tvThoiGiamLamViec"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Thứ 2 - Thứ 6 (từ 08:00 đến 17:30)\nSáng thứ 7, 8h-12h" />
+                android:singleLine="false"
+                android:lines="3"
+                android:ellipsize="none"
+                android:scrollHorizontally="false"
+                android:inputType="textMultiLine"
+                android:text="Thứ 2 - Thứ 6 (từ 08:00 đến 17:30)\nSáng thứ 7, 8h-11h"/>
         </LinearLayout>
     </ScrollView>
 
@@ -442,6 +447,7 @@
         android:elevation="20dp"
         android:background="@android:color/white">
         <ImageView
+            android:id="@+id/ic_savedJob"
             android:layout_width="58dp"
             android:src="@drawable/round_bookmark_border_24"
             android:layout_height="50dp"/>

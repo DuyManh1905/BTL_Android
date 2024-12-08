@@ -54,6 +54,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                     <TextView
+                        android:id="@+id/jobAddress"
                         android:padding="2dp"
                         android:background="@color/gray_background"
                         android:text="Hà Nội"
@@ -77,20 +78,38 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
+
             <ImageView
+                android:id="@+id/ic_savedJob"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_weight="1"
-                android:src="@drawable/baseline_attachment_24"
-                android:layout_width="32dp"
-                android:layout_height="32dp"/>
+                android:src="@drawable/ic_bookmark" />
 
         </LinearLayout>
         <View
             android:background="@color/gray"
             android:layout_width="match_parent"
-            android:layout_height="1dp"/>
-        <TextView
-            android:text="@string/days_remaining"
+            android:layout_height="2dp"/>
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="Còn "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/soNgayKT"
+                android:text="18 "
+                android:textStyle="bold"
+                android:textColor="@color/green"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:text=" ngày để ứng tuyển"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

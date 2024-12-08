@@ -1,5 +1,8 @@
 package com.duymanh.btl.adapter;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,20 +13,36 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.duymanh.btl.R;
+import com.duymanh.btl.api.ApiService;
+import com.duymanh.btl.api.RetrofitClient;
 import com.duymanh.btl.model.Job;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class RecycleViewJobAdapter extends RecyclerView.Adapter<RecycleViewJobAdapter.HomeViewHolder> {
 
     private List<Job> list;
+    private Context context;
 
     private ItemListener itemListener;
 
-    public RecycleViewJobAdapter() {
+    public RecycleViewJobAdapter(Context context) {
         list = new ArrayList<>();
+        this.context = context;
     }
 
 
@@ -55,7 +74,9 @@ public class RecycleViewJobAdapter extends RecyclerView.Adapter<RecycleViewJobAd
         holder.jobTitle.setText(job.getTitle());
         holder.jobLocation.setText(job.getCompany().getName());
         holder.jobSalary.setText(job.getSalary());
-        Random r = new Random();
+        holder.jobAddress.setText(job.getJobRequirement().getArea());
+        holder.soNgayKT.setText(getDayToEnd(job.getEndAt())+"");
+
         int randomNumber = (int)(Math.random() * 5);
         int[] images = {
                 R.drawable.company1,
@@ -66,12 +87,15 @@ public class RecycleViewJobAdapter extends RecyclerView.Adapter<RecycleViewJobAd
         };
         holder.imgCompany.setImageResource(images[randomNumber]);
 
-        if(job.getJobRequirement()!=null){
+        if(job.getJobRequirement()!=null && !job.getJobRequirement().getExperience().equals("0")){
             holder.jobExperience.setText("> "+job.getJobRequirement().getExperience()+" năm kinh nghiệm");
         }
         else{
             holder.jobExperience.setText("khong y/c kinh nghiem");
         }
+        //check saved
+        checkJobSavedStatus(job.getId(), holder.ic_savedJob);
+
     }
 
     @Override
@@ -80,16 +104,19 @@ public class RecycleViewJobAdapter extends RecyclerView.Adapter<RecycleViewJobAd
     }
 
     public class HomeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private TextView jobTitle,jobLocation,jobSalary,jobExperience;
-        private ImageView imgCompany;
+        private TextView jobTitle,jobLocation,jobSalary,jobExperience, jobAddress,soNgayKT;
+        private ImageView imgCompany, ic_savedJob;
 
         public HomeViewHolder(@NonNull View view) {
             super(view);
+            soNgayKT = itemView.findViewById(R.id.soNgayKT);
+            jobAddress = itemView.findViewById(R.id.jobAddress);
             jobTitle = itemView.findViewById(R.id.job_title);
             jobLocation = itemView.findViewById(R.id.job_location);
             jobSalary = itemView.findViewById(R.id.job_salary);
             imgCompany = itemView.findViewById(R.id.imgCompany);
             jobExperience = itemView.findViewById(R.id.job_experience);
+            ic_savedJob = itemView.findViewById(R.id.ic_savedJob);
             view.setOnClickListener(this);
         }
 
@@ -100,6 +127,59 @@ public class RecycleViewJobAdapter extends RecyclerView.Adapter<RecycleViewJobAd
             }
         }
     }
+
+    public long getDayToEnd(String end){
+        long daysBetween = 10;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+        try {
+            // Chuyển đổi ngày từ API thành Date
+            Date targetDate = sdf.parse(end);
+            // Ngày hiện tại
+            Date currentDate = new Date();
+
+            // Tính số ngày
+            long diffInMillis = targetDate.getTime() - currentDate.getTime();
+            daysBetween = TimeUnit.MILLISECONDS.toDays(diffInMillis);
+            Log.d("ldm", "getDayToEnd: "+daysBetween);
+
+        } catch (ParseException e) {
+            Log.d("ldm", "getDayToEndBiLoi: "+daysBetween);
+            e.printStackTrace();
+        }
+        return daysBetween;
+    }
+
+    private void checkJobSavedStatus(int jobId, ImageView icSavedJob) {
+        Retrofit retrofit = RetrofitClient.getClient("http://10.0.2.2:8081");
+        ApiService apiService = retrofit.create(ApiService.class);
+        SharedPreferences prefs = context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE);
+        String userId = prefs.getString("user_id", null);
+
+        Call<Boolean> call = apiService.checkUserSaveJob(Integer.parseInt(userId),jobId);
+
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if(response.isSuccessful() && response.body()!=null){
+                    boolean isSaved = response.body();
+                    if(isSaved) {
+                        icSavedJob.setImageResource(R.drawable.ic_bookmark);
+                    }
+                    else{
+                        icSavedJob.setImageResource(R.drawable.ic_bookmark_border);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                Log.e("API_ERROR", "Failed to check job saved status", t);
+                icSavedJob.setImageResource(R.drawable.ic_bookmark_border);
+            }
+        });
+    }
+
 
     public interface ItemListener {
         void onItemClick(View view,int position);

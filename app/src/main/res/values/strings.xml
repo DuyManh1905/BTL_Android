@@ -9,6 +9,32 @@
         <item>Sức khỏe</item>
     </string-array>
 
+    <string-array name="kinhNghiem">
+        <item>Tất cả</item>
+        <item>Sắp đi làm</item>
+        <item>Trên 1 năm</item>
+        <item>Trên 2 năm</item>
+        <item>Trên 5 năm</item>
+    </string-array>
+
+    <string-array name="khuVuc">
+        <item>Tất cả</item>
+        <item>Hà Nội</item>
+        <item>TP HCM</item>
+        <item>Đà Nẵng</item>
+        <item>Nam Định</item>
+    </string-array>
+
+    <string-array name="luong">
+        <item>Tất cả</item>
+        <item>Dưới 10 triệu</item>
+        <item>10-15 triệu</item>
+        <item>15-20 triệu</item>
+        <item>20-25 triệu</item>
+        <item>Trên 25 triệu</item>
+        <item>Thỏa thuận</item>
+    </string-array>
+
     <string name="days_remaining">Còn <b>18</b> ngày để ứng tuyển</string>
 
 </resources>

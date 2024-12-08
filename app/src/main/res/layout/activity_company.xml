@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
-                android:src="@drawable/ic_follow"
+                android:src="@drawable/ic_follow_2"
                 android:layout_width="25dp"
                 android:layout_height="25dp"/>
             <TextView
@@ -74,6 +74,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"/>
             <TextView
+                android:id="@+id/slNhanVien"
                 android:textColor="@color/black"
                 android:textSize="13dp"
                 android:text="  50+ nhân viên"

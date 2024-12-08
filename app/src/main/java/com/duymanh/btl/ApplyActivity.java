@@ -2,6 +2,7 @@ package com.duymanh.btl;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +23,8 @@ import com.duymanh.btl.dto.UserDTO;
 import com.duymanh.btl.model.Job;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import retrofit2.Call;
@@ -30,9 +34,15 @@ import retrofit2.Retrofit;
 
 public class ApplyActivity extends AppCompatActivity {
 
-    private TextView tvDescription, tvCompany, tvJobName;
+    private TextView tvDiaDiemLamViec, tvThoiGiamLamViec, tvYeuCau, tvQuyenLoi;
+    private TextView tvDescription, tvCompany, tvJobName, tvDiaChi, tvKinhNghiem, tvMucLuong,tvKinhnghiem2, tvHinhThuc, tvSoLuongTuyen, tvGioiTinh, tvCapBac, tvHanNop;
     private Button btnApply;
+
+    private ImageView ic_savedJob;
     private Job job;
+
+    private boolean isSaved = false;
+
 
     private ApiService apiService;
 
@@ -43,20 +53,49 @@ public class ApplyActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         job = (Job) intent.getSerializableExtra("item");
-
         initView();
+
+        Log.d("Debug", "Thời gian làm việc: " + job.getTime());
 
         tvDescription.setText(job.getDesciption());
         tvCompany.setText(job.getCompany().getName());
         tvJobName.setText(job.getTitle());
+        tvDiaChi.setText(job.getJobRequirement().getArea());
+        tvMucLuong.setText(job.getSalary());
+        tvHinhThuc.setText(job.getForm());
 
-        String requirment = "yeu cau: \n";
+        if(job.getNumberRecruitment() !=0){
+            tvSoLuongTuyen.setText(job.getNumberRecruitment()+"");
+        }
+        else{
+            tvSoLuongTuyen.setText("Không giới hạn");
+        }
+
+
+        if(job.getJobRequirement()!=null && !job.getJobRequirement().getExperience().equals("0")){
+            tvKinhNghiem.setText("> "+job.getJobRequirement().getExperience()+" năm");
+            tvKinhnghiem2.setText("> "+job.getJobRequirement().getExperience()+" năm");
+        }
+        else{
+            tvKinhNghiem.setText("khong y/c");
+            tvKinhnghiem2.setText("khong y/c");
+        }
+
+        tvGioiTinh.setText(job.getJobRequirement().getSex());
+        tvCapBac.setText(job.getRanking());
+        tvHanNop.setText(dateLongtoShort(job.getEndAt()));
+        tvDiaDiemLamViec.setText(job.getArea());
+        tvThoiGiamLamViec.setText(job.getTime().replace("\\n", "\n"));
+
+        String requirment = "";
         if(job.getJobRequirement()!=null){
             requirment+= job.getJobRequirement().getSkillRequire();
             requirment+= "\n";
             requirment+= job.getJobRequirement().getExperience()+" nam kinh nghiem";
         }
 
+        tvYeuCau.setText(requirment);
+        tvQuyenLoi.setText(job.getInterest().replace("\\n", "\n"));
 
         btnApply.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,11 +121,26 @@ public class ApplyActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        tvQuyenLoi = findViewById(R.id.tvQuyenLoi);
+        tvYeuCau = findViewById(R.id.tvYeuCau);
+        tvThoiGiamLamViec = findViewById(R.id.tvThoiGiamLamViec);
+        tvDiaDiemLamViec = findViewById(R.id.tvDiaDiemLamViec);
+        tvHanNop = findViewById(R.id.tvHanNop);
+        tvCapBac = findViewById(R.id.tvCapBac);
+        tvGioiTinh = findViewById(R.id.tvGioiTinh);
+        tvSoLuongTuyen = findViewById(R.id.tvSoLuongTuyen);
+        tvHinhThuc = findViewById(R.id.tvHinhThuc);
+        tvMucLuong = findViewById(R.id.tvMucLuong);
+        tvDiaChi = findViewById(R.id.tvDiachi);
+        tvKinhNghiem = findViewById(R.id.tvKinhnghiem);
+        tvKinhnghiem2 = findViewById(R.id.tvKinhnghiem2);
         tvJobName = findViewById(R.id.tvJobName);
         tvDescription = findViewById(R.id.tvDescription);
         tvCompany = findViewById(R.id.tvCompanyName);
         btnApply = findViewById(R.id.btnApply);
+        ic_savedJob = findViewById(R.id.ic_savedJob);
         checkApply();
+        checkJobSavedStatus();
     }
 
     public void checkApply() {
@@ -132,34 +186,94 @@ public class ApplyActivity extends AppCompatActivity {
         });
     }
 
-    private void createApplication(ApplicationFormDTO applicationFormDTO) {
+    private String dateLongtoShort(String inputDate){
+        // Định dạng ban đầu của chuỗi
+        SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
+        // Định dạng mong muốn
+        SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String  formattedDate = "22/12/2024";
+
+        try {
+            // Chuyển đổi chuỗi sang Date
+            Date date = inputFormat.parse(inputDate);
+            // Định dạng lại Date thành chuỗi mong muốn
+            formattedDate = outputFormat.format(date);
+            // Hiển thị kết quả
+            System.out.println("Ngày đã chuyển đổi: " + formattedDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return formattedDate;
+    }
+
+    private void checkJobSavedStatus() {
         Retrofit retrofit = RetrofitClient.getClient("http://10.0.2.2:8081");
-        apiService = retrofit.create(ApiService.class);
-        apiService.createApplicationForm(applicationFormDTO).enqueue(new Callback<ResponseDTO<ApplicationFormDTO>>() {
+        ApiService apiService = retrofit.create(ApiService.class);
+        SharedPreferences prefs = getSharedPreferences("app_prefs", Context.MODE_PRIVATE);
+        String userId = prefs.getString("user_id", null);
+
+        Call<Boolean> call = apiService.checkUserSaveJob(Integer.parseInt(userId),job.getId());
+
+        call.enqueue(new Callback<Boolean>() {
             @Override
-            public void onResponse(Call<ResponseDTO<ApplicationFormDTO>> call, Response<ResponseDTO<ApplicationFormDTO>> response) {
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    Intent intent = new Intent(ApplyActivity.this, SuccessActivity.class);
-                    startActivity(intent);
-                } else {
-                    try {
-                        String errorBody = response.errorBody().string();  // lấy thông tin chi tiết lỗi
-                        Log.e("API_ERROR", "Error: " + response.message() + ", Error Body: " + errorBody);
-                    } catch (IOException e) {
-                        Log.e("API_ERROR", "Error: " + response.message() + ", but failed to read error body");
-                    }
-                    Toast.makeText(ApplyActivity.this, "Lỗi khi gọi API", Toast.LENGTH_SHORT).show();
+                    isSaved = response.body();
+                    updateSavedJobIcon();
+
+                    // Set OnClickListener for the icon
+                    ic_savedJob.setOnClickListener(v -> {
+                        if (!isSaved) {
+                            saveJob();
+                        } else {
+                            Toast.makeText(ApplyActivity.this, "Công việc đã được lưu!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             }
 
             @Override
-            public void onFailure(Call<ResponseDTO<ApplicationFormDTO>> call, Throwable t) {
-                // Xử lý lỗi kết nối hoặc các lỗi khác
-                Log.e("API_FAILURE", "Error: " + t.getMessage());
-                Toast.makeText(ApplyActivity.this, "Error occurred while creating application", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                Log.e("API_ERROR", "Failed to check job saved status", t);
+                ic_savedJob.setImageResource(R.drawable.ic_bookmark_border);
             }
         });
     }
+
+    private void saveJob() {
+        Retrofit retrofit = RetrofitClient.getClient("http://10.0.2.2:8081");
+        ApiService apiService = retrofit.create(ApiService.class);
+        SharedPreferences prefs = getSharedPreferences("app_prefs", Context.MODE_PRIVATE);
+        String userId = prefs.getString("user_id", null);
+
+        Call<Void> call = apiService.saveJob(Integer.parseInt(userId), job.getId());
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    isSaved = true;
+                    updateSavedJobIcon();
+                    Toast.makeText(ApplyActivity.this, "Đã lưu công việc!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(ApplyActivity.this, "Không thể lưu công việc!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("API_ERROR", "Failed to save job", t);
+                Toast.makeText(ApplyActivity.this, "Lỗi khi lưu công việc!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    private void updateSavedJobIcon() {
+        if (isSaved) {
+            ic_savedJob.setImageResource(R.drawable.ic_bookmark);
+        } else {
+            ic_savedJob.setImageResource(R.drawable.ic_bookmark_border);
+        }
+    }
+
 
 }

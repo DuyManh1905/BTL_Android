@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.duymanh.btl.ApplyActivity;
 import com.duymanh.btl.R;
+import com.duymanh.btl.SearchActivity;
 import com.duymanh.btl.adapter.RecycleViewJobAdapter;
 import com.duymanh.btl.api.ApiResponseJobFitUser;
 import com.duymanh.btl.api.ApiService;
@@ -35,27 +36,21 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class FragmentHome extends Fragment implements RecycleViewJobAdapter.ItemListener {
-
     private RecycleViewJobAdapter adapter;
-
     private RecyclerView recyclerView;
-
-    private TextView nowDate, helloName;
-
+    private TextView nowDate, tvXemTatCa;
     private SearchView searchView;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_home,container,false);
     }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.recycleView);
 
-        adapter = new RecycleViewJobAdapter();
+        adapter = new RecycleViewJobAdapter(requireContext());
 
         searchView = view.findViewById(R.id.search);
 
@@ -72,22 +67,20 @@ public class FragmentHome extends Fragment implements RecycleViewJobAdapter.Item
     }
 
     private void initView(View view) {
-        helloName = view.findViewById(R.id.helloName);
+        tvXemTatCa = view.findViewById(R.id.tvXemTatCa);
         nowDate = view.findViewById(R.id.nowDate);
         Date d = new Date();
         SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
         String day = f.format(d);
         nowDate.setText(day);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
+        searchView.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), SearchActivity.class);
+            startActivity(intent);
+        });
 
-            @Override
-            public boolean onQueryTextChange(String newText) {//xu ly khi thay doi text
-                return false;
-            }
+        tvXemTatCa.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), SearchActivity.class);
+            startActivity(intent);
         });
     }
 

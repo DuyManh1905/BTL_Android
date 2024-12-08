@@ -7,18 +7,29 @@ public class JobRequirement implements Serializable {
     private String experience;
     private String major;
     private String area;
+
+    private String sex;
     private String programLanguage;
     private String languageCertificate;
     private String skillRequire;
 
-    public JobRequirement(Integer id, String experience, String major, String area, String programLanguage, String languageCertificate, String skillRequire) {
+    public JobRequirement(Integer id, String experience, String major, String area, String sex, String programLanguage, String languageCertificate, String skillRequire) {
         this.id = id;
         this.experience = experience;
         this.major = major;
         this.area = area;
+        this.sex = sex;
         this.programLanguage = programLanguage;
         this.languageCertificate = languageCertificate;
         this.skillRequire = skillRequire;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
     public Integer getId() {

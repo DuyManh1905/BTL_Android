@@ -14,8 +14,41 @@ public interface ApiService {
     @GET("/api/job/all")
     Call<ApiResponseJobFitUser> getAllJobs();
 
+    @GET("/api/job/searchAll-mobile")
+    Call<ApiResponseJobFitUser> searchAll(
+            @Query("title") String title,
+            @Query("area") String area,
+            @Query("minExperience") String minExperience,
+            @Query("minSalary") String minSalary);
+
     @GET("/api/company/all")
     Call<ApiResponseCompany> getAllCompany();
+
+    @GET("/api/applicationform/dashboard/user")
+    Call<ApiResponseApplycationForm> getAllApplycationForm(
+            @Query("userId") int userId
+    );
+
+    @GET("/api/applicationform/count/by-user/{id}")
+    Call<ResponseDTO<Integer>> getApplicationFormCountByUser(@Path("id") int userId);
+
+
+    @GET("api/user/check")
+    Call<Boolean> checkUserSaveJob(
+            @Query("userId") int userId,
+            @Query("jobId") int jobId
+    );
+
+    @POST("/api/user/{userId}/save-job/{jobId}")
+    Call<Void> saveJob(@Path("userId") int userId, @Path("jobId") int jobId);
+
+
+    @GET("api/user/{userId}/saved-jobs/count")
+    Call<Integer> getSavedJobsCount(@Path("userId") int userId);
+    @GET("/api/user/{id}/saved-jobs")
+    Call<ApiResponseJobFitUser> getAllJobSaved(
+            @Path("id") int userId
+    );
 
     @POST("/api/login")
     Call<ResponseDTO<String>> login(

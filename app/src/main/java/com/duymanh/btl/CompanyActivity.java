@@ -29,7 +29,7 @@ import retrofit2.Retrofit;
 
 public class CompanyActivity extends AppCompatActivity implements RecycleViewJobAdapter.ItemListener {
 
-    private TextView tvDescription, tvAddress, tvCompanyName;
+    private TextView tvDescription, tvAddress, tvCompanyName, slNhanVien, tvLinkCompany;
     private RecyclerView recyclerView;
     private RecycleViewJobAdapter adapter;
 
@@ -45,7 +45,7 @@ public class CompanyActivity extends AppCompatActivity implements RecycleViewJob
         company = (Company) intent.getSerializableExtra("item");
         initView();
 
-        adapter = new RecycleViewJobAdapter();
+        adapter = new RecycleViewJobAdapter(this);
 
         getAllJobByCompany();
 
@@ -55,15 +55,18 @@ public class CompanyActivity extends AppCompatActivity implements RecycleViewJob
         adapter.setItemListener(this);
 
         tvDescription.setText(company.getDesciption());
+        slNhanVien.setText(company.getScale()+"+ nhân viên");
         tvAddress.setText(company.getAddress());
         tvCompanyName.setText(company.getName());
+        tvLinkCompany.setText(company.getLinkWebsite());
     }
 
     private void initView() {
+        tvLinkCompany = findViewById(R.id.tvLinkCompany);
+        slNhanVien = findViewById(R.id.slNhanVien);
         recyclerView = findViewById(R.id.recycleViewJobInCompany);
         tvDescription = findViewById(R.id.tvDescription);
         tvAddress = findViewById(R.id.tvAddress);
-//        tvQuymo = findViewById(R.id.tvQuymo);
         tvCompanyName = findViewById(R.id.tvCompanyName);
     }
     public void getAllJobByCompany(){

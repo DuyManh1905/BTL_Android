@@ -9,6 +9,7 @@ public class Company implements Serializable {
     private String desciption;
     private String size;
 
+    private int scale;
     private String stype;
 
     private String linkWebsite;
@@ -17,6 +18,9 @@ public class Company implements Serializable {
 
     // Getters and Setters
 
+
+    public Company() {
+    }
 
     public Company(int id, String name, String address, String desciption, String size, String stype, String linkWebsite, String avataURL, String imageCoverURL) {
         this.id = id;
@@ -28,6 +32,14 @@ public class Company implements Serializable {
         this.linkWebsite = linkWebsite;
         this.avataURL = avataURL;
         this.imageCoverURL = imageCoverURL;
+    }
+
+    public int getScale() {
+        return scale;
+    }
+
+    public void setScale(int scale) {
+        this.scale = scale;
     }
 
     public int getId() {

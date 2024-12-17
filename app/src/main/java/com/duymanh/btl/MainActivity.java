@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView navigationView;
     private ViewPager viewPager;
 
-    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,17 +38,20 @@ public class MainActivity extends AppCompatActivity {
 
         navigationView = findViewById(R.id.bottom_nav);
         viewPager = findViewById(R.id.viewPager);
-        fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,AddActivity.class);
-                startActivity(intent);
-            }
-        });
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(adapter);
+
+        // Kiểm tra Intent để mở Fragment tương ứng
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("fragment_to_open")) {
+            String fragmentToOpen = intent.getStringExtra("fragment_to_open");
+            if ("FragmentMess".equals(fragmentToOpen)) {
+                viewPager.setCurrentItem(2); // Đặt trang tương ứng với FragmentMess
+                navigationView.getMenu().findItem(R.id.mMess).setChecked(true);
+            }
+        }
+        
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

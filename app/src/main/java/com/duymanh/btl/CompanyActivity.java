@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.duymanh.btl.adapter.RecycleViewCompanyAdapter;
@@ -32,6 +33,8 @@ public class CompanyActivity extends AppCompatActivity implements RecycleViewJob
     private TextView tvDescription, tvAddress, tvCompanyName, slNhanVien, tvLinkCompany;
     private RecyclerView recyclerView;
     private RecycleViewJobAdapter adapter;
+
+    private ImageView mapCompany;
 
     private Company company;
     private ApiService apiService;
@@ -59,6 +62,11 @@ public class CompanyActivity extends AppCompatActivity implements RecycleViewJob
         tvAddress.setText(company.getAddress());
         tvCompanyName.setText(company.getName());
         tvLinkCompany.setText(company.getLinkWebsite());
+
+        mapCompany.setOnClickListener(v -> {
+            Intent intent1 = new Intent(CompanyActivity.this, MapActivity.class);
+            startActivity(intent1);
+        });
     }
 
     private void initView() {
@@ -68,6 +76,7 @@ public class CompanyActivity extends AppCompatActivity implements RecycleViewJob
         tvDescription = findViewById(R.id.tvDescription);
         tvAddress = findViewById(R.id.tvAddress);
         tvCompanyName = findViewById(R.id.tvCompanyName);
+        mapCompany = findViewById(R.id.mapCompany);
     }
     public void getAllJobByCompany(){
         Retrofit retrofit = RetrofitClient.getClient("http://10.0.2.2:8081");

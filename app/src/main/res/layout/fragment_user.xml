@@ -104,7 +104,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/suaKinhNghiem"
+                    android:id="@+id/btnSuaKinhNghiem"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -120,6 +120,11 @@
                 android:layout_height="wrap_content"
                 android:text="Chưa cập nhật"
                 android:textColor="@color/yellow" />
+            <Spinner
+                android:id="@+id/spinnerKinhNghiem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
 
             <View
                 android:layout_width="match_parent"
@@ -149,7 +154,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/suaCongViecMongMuon"
+                    android:id="@+id/btnSuaCongViecMongMuon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -160,11 +165,16 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/CongViecMongMuon"
+                android:id="@+id/congViecMongMuon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Chưa cập nhật"
                 android:textColor="@color/yellow" />
+            <Spinner
+                android:id="@+id/spinnerCongViecMongMuon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
 
             <View
                 android:layout_width="match_parent"
@@ -194,7 +204,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/suaDiaDiemLamViecMongMuon"
+                    android:id="@+id/btnSuaDiaDiemMongMuon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -210,6 +220,11 @@
                 android:layout_height="wrap_content"
                 android:text="Chưa cập nhật"
                 android:textColor="@color/yellow" />
+            <Spinner
+                android:id="@+id/spinnerDiaDiemMongMuon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
 
             <View
                 android:layout_width="match_parent"

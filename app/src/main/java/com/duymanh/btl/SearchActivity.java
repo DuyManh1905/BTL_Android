@@ -36,7 +36,7 @@ public class SearchActivity extends AppCompatActivity implements RecycleViewJobA
 
     private RecycleViewJobAdapter adapter;
 
-    private Spinner spKhuVuc, spMucLuong, spKinhNghiem;
+    private Spinner spKhuVuc, spMucLuong, spKinhNghiem, spChuyenNganh;
     private LinearLayout filter;
     private TextView soLuongJob;
 
@@ -61,24 +61,28 @@ public class SearchActivity extends AppCompatActivity implements RecycleViewJobA
         spKhuVuc = findViewById(R.id.spKhuVuc);
         spMucLuong = findViewById(R.id.spMucLuong);
         spKinhNghiem = findViewById(R.id.spKinhNghiem);
+        spChuyenNganh = findViewById(R.id.spChuyenNganh);
         soLuongJob = findViewById(R.id.tvSoLuongJob);
         filter = findViewById(R.id.filter);
 
         String[] dskhuvuc = getResources().getStringArray(R.array.khuVuc);
         String[] dsLuong = getResources().getStringArray(R.array.luong);
         String[] dskinhNghiem = getResources().getStringArray(R.array.kinhNghiem);
+        String[] dschuyenNganh = getResources().getStringArray(R.array.chuyenNganh);
 
         ArrayAdapter<String> spinnerAdapter1 = new ArrayAdapter<>(this, R.layout.item_spinner, dskhuvuc);
         ArrayAdapter<String> spinnerAdapter2 = new ArrayAdapter<>(this, R.layout.item_spinner, dsLuong);
         ArrayAdapter<String> spinnerAdapter3 = new ArrayAdapter<>(this, R.layout.item_spinner, dskinhNghiem);
-
+        ArrayAdapter<String> spinnerAdapter4 = new ArrayAdapter<>(this, R.layout.item_spinner, dschuyenNganh);
         spinnerAdapter1.setDropDownViewResource(R.layout.item_spinner);
         spinnerAdapter2.setDropDownViewResource(R.layout.item_spinner);
         spinnerAdapter3.setDropDownViewResource(R.layout.item_spinner);
+        spinnerAdapter4.setDropDownViewResource(R.layout.item_spinner);
 
         spKhuVuc.setAdapter(spinnerAdapter1);
         spMucLuong.setAdapter(spinnerAdapter2);
         spKinhNghiem.setAdapter(spinnerAdapter3);
+        spChuyenNganh.setAdapter(spinnerAdapter4);
         jobs = new ArrayList<>();
 
         filter.setOnClickListener(v -> {
@@ -98,6 +102,7 @@ public class SearchActivity extends AppCompatActivity implements RecycleViewJobA
         String area = spKhuVuc.getSelectedItem().toString(); // Lấy giá trị từ Spinner Khu Vực
         String salary = spMucLuong.getSelectedItem().toString(); // Lấy giá trị từ Spinner Mức Lương
         String experience = spKinhNghiem.getSelectedItem().toString(); // Lấy giá trị từ Spinner Kinh Nghiệm
+        String major = spChuyenNganh.getSelectedItem().toString();
 
         Log.d("duymanhxx", "keyword: "+keyword+" ,area: "+area+" ,salary: "+salary+" ,experience: "+experience);
         String minExperiance = "0";
@@ -115,6 +120,10 @@ public class SearchActivity extends AppCompatActivity implements RecycleViewJobA
             salary = salary.split("\\s+")[1];
         }
 
+        if(major.equals("Tất cả")){
+            major = "";
+        }
+
         if(experience.equals("Tất cả")){
             experience="0";
         }
@@ -126,7 +135,7 @@ public class SearchActivity extends AppCompatActivity implements RecycleViewJobA
         }
 
         Log.d("duymanhxx", "keyword: "+keyword+" ,area: "+area+" ,salary: "+salary+" ,experience: "+experience);
-        Call<ApiResponseJobFitUser> call = apiService.searchAll(keyword,area,experience,"");
+        Call<ApiResponseJobFitUser> call = apiService.searchAll(keyword,area,major,experience,"");
         call.enqueue(new Callback<ApiResponseJobFitUser>() {
             @Override
             public void onResponse(Call<ApiResponseJobFitUser> call, Response<ApiResponseJobFitUser> response) {

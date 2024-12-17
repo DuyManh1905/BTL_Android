@@ -17,6 +17,15 @@
         android:theme="@style/Theme.BTL"
         tools:targetApi="31">
         <activity
+            android:name=".MapActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditCvActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CvActivity"
+            android:exported="false" />
+        <activity
             android:name=".JobSavedActivity"
             android:exported="false" />
         <activity
@@ -65,6 +74,10 @@
         <receiver
             android:name=".MyReceiver"
             android:exported="false" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/my_map_api_key" />
     </application>
 
 </manifest>

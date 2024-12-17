@@ -1,12 +1,16 @@
 package com.duymanh.btl.api;
 
 import com.duymanh.btl.dto.ApplicationFormDTO;
+import com.duymanh.btl.dto.JobSuggestionDTO;
+import com.duymanh.btl.model.Cv;
 import com.duymanh.btl.model.User;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -18,13 +22,14 @@ public interface ApiService {
     Call<ApiResponseJobFitUser> searchAll(
             @Query("title") String title,
             @Query("area") String area,
+            @Query("major") String major,
             @Query("minExperience") String minExperience,
             @Query("minSalary") String minSalary);
 
     @GET("/api/company/all")
     Call<ApiResponseCompany> getAllCompany();
 
-    @GET("/api/applicationform/dashboard/user")
+    @GET("/api/applicationform/mobile/user")
     Call<ApiResponseApplycationForm> getAllApplycationForm(
             @Query("userId") int userId
     );
@@ -42,12 +47,15 @@ public interface ApiService {
     @POST("/api/user/{userId}/save-job/{jobId}")
     Call<Void> saveJob(@Path("userId") int userId, @Path("jobId") int jobId);
 
+    @DELETE("/api/user/{userId}/remove-job/{jobId}")
+    Call<Void> removeSaveJob(@Path("userId") int userId, @Path("jobId") int jobId);
+
 
     @GET("api/user/{userId}/saved-jobs/count")
     Call<Integer> getSavedJobsCount(@Path("userId") int userId);
-    @GET("/api/user/{id}/saved-jobs")
+    @GET("/api/user/saved-jobs/{userId}")
     Call<ApiResponseJobFitUser> getAllJobSaved(
-            @Path("id") int userId
+            @Path("userId") int userId
     );
 
     @POST("/api/login")
@@ -65,15 +73,23 @@ public interface ApiService {
     @GET("/api/job/get-all-job-fit-user/{id}")
     Call<ApiResponseJobFitUser> getAllJobsFitUser(@Path("id") int id);
 
+    @GET("api/cv/{id}")
+    Call<ResponseDTO<Cv>> getCvByUserId(@Path("id") int id);
+
     @POST("/api/user/register")
     Call<ResponseDTO<User>> register(
             @Query("email") String email,
             @Query("password") String password,
-            @Query("username") String username,
-            @Query("name") String name);
+            @Query("name") String name,
+            @Query("username") String username);
 
     @POST("/api/applicationform/dashboard/create")
     Call<ResponseDTO<ApplicationFormDTO>> createApplicationForm(@Body ApplicationFormDTO applicationFormDTO);
+
+
+    @PUT("api/cv/update-job-suggess")
+    Call<ResponseDTO<JobSuggestionDTO>> updateSuggestionCv(@Body JobSuggestionDTO jobSuggestionDTO);
+
 
     @GET("/api/applicationform/check-application")
     Call<ResponseDTO<String>> checkApplicationFormExists(

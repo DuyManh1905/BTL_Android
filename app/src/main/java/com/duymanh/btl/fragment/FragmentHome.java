@@ -23,8 +23,10 @@ import com.duymanh.btl.SearchActivity;
 import com.duymanh.btl.adapter.RecycleViewJobAdapter;
 import com.duymanh.btl.api.ApiResponseJobFitUser;
 import com.duymanh.btl.api.ApiService;
+import com.duymanh.btl.api.ResponseDTO;
 import com.duymanh.btl.api.RetrofitClient;
 import com.duymanh.btl.model.Job;
+import com.duymanh.btl.model.User;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -38,7 +40,9 @@ import retrofit2.Retrofit;
 public class FragmentHome extends Fragment implements RecycleViewJobAdapter.ItemListener {
     private RecycleViewJobAdapter adapter;
     private RecyclerView recyclerView;
-    private TextView nowDate, tvXemTatCa;
+    private TextView nowDate, tvXemTatCa, helloName;
+
+    private ApiService apiService;
     private SearchView searchView;
     @Nullable
     @Override
@@ -53,9 +57,18 @@ public class FragmentHome extends Fragment implements RecycleViewJobAdapter.Item
         adapter = new RecycleViewJobAdapter(requireContext());
 
         searchView = view.findViewById(R.id.search);
+        Retrofit retrofit = RetrofitClient.getClient("http://10.0.2.2:8081");
+        apiService = retrofit.create(ApiService.class); // Khởi tạo apiService
+
+        SharedPreferences prefs = getActivity().getSharedPreferences("app_prefs", getContext().MODE_PRIVATE);
+        String userId = prefs.getString("user_id", null);
 
 
         initView(view);
+
+        if(userId!=null){
+            fetchUserData(Integer.parseInt(userId));
+        }
 
         getAllJobs();
 
@@ -66,7 +79,25 @@ public class FragmentHome extends Fragment implements RecycleViewJobAdapter.Item
 
     }
 
+    private void fetchUserData(int userId) {
+        apiService.getUserDashboard(userId).enqueue(new Callback<ResponseDTO<User>>() {
+            @Override
+            public void onResponse(Call<ResponseDTO<User>> call, Response<ResponseDTO<User>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    User user = response.body().getData();
+                    helloName.setText("Hello "+user.getName());
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseDTO<User>> call, Throwable t) {
+                // Xử lý khi có lỗi
+            }
+        });
+
+    }
+
     private void initView(View view) {
+        helloName = view.findViewById(R.id.helloName);
         tvXemTatCa = view.findViewById(R.id.tvXemTatCa);
         nowDate = view.findViewById(R.id.nowDate);
         Date d = new Date();

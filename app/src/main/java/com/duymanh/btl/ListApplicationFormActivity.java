@@ -18,6 +18,7 @@ import com.duymanh.btl.api.ApiService;
 import com.duymanh.btl.api.RetrofitClient;
 import com.duymanh.btl.model.ApplicationForm;
 import com.duymanh.btl.model.Company;
+import com.duymanh.btl.model.Cv;
 import com.duymanh.btl.model.Job;
 import com.duymanh.btl.model.User;
 
@@ -118,13 +119,9 @@ public class ListApplicationFormActivity extends AppCompatActivity implements Re
 
     @Override
     public void onViewCVClick(View view, int position) {
-        ApplicationForm applicationForm = adapter.getSchedule(position);
-        Job job = applicationForm.getJob();
-
-        if (job != null) {
-            // Mở Activity chi tiết CV
-            Toast.makeText(this,"CV",Toast.LENGTH_SHORT).show();
-        }
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("fragment_to_open", "FragmentMess");
+        startActivity(intent);
     }
 
 

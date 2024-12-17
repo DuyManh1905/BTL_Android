@@ -72,7 +72,7 @@ public class SignupActivity extends AppCompatActivity {
 
     private void registerUser(String email, String password, String username, String name) {
         // Gọi API để đăng ký
-        Call<ResponseDTO<User>> call = apiService.register(email, password, username, username);
+        Call<ResponseDTO<User>> call = apiService.register(email, password, name, username);
         call.enqueue(new Callback<ResponseDTO<User>>() {
             @Override
             public void onResponse(Call<ResponseDTO<User>> call, Response<ResponseDTO<User>> response) {

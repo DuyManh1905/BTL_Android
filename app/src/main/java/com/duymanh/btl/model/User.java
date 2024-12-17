@@ -11,6 +11,26 @@ public class User implements Serializable {
     private String birthdate;
     private List<Role> roles;
 
+    private List<Cv> cvs;
+
+    public User(int id, String name, String username, String email, String birthdate, List<Role> roles, List<Cv> cvs) {
+        this.id = id;
+        this.name = name;
+        this.username = username;
+        this.email = email;
+        this.birthdate = birthdate;
+        this.roles = roles;
+        this.cvs = cvs;
+    }
+
+    public List<Cv> getCvs() {
+        return cvs;
+    }
+
+    public void setCvs(List<Cv> cvs) {
+        this.cvs = cvs;
+    }
+
     // Getters and Setters
 
     public int getId() {

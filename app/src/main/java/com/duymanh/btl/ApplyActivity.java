@@ -35,7 +35,7 @@ import retrofit2.Retrofit;
 public class ApplyActivity extends AppCompatActivity {
 
     private TextView tvDiaDiemLamViec, tvThoiGiamLamViec, tvYeuCau, tvQuyenLoi;
-    private TextView tvDescription, tvCompany, tvJobName, tvDiaChi, tvKinhNghiem, tvMucLuong,tvKinhnghiem2, tvHinhThuc, tvSoLuongTuyen, tvGioiTinh, tvCapBac, tvHanNop;
+    private TextView tvDescription, tvCompany, tvJobName, tvDiaChi, tvKinhNghiem, tvMucLuong, tvKinhnghiem2, tvHinhThuc, tvSoLuongTuyen, tvGioiTinh, tvCapBac, tvHanNop;
     private Button btnApply;
 
     private ImageView ic_savedJob;
@@ -64,19 +64,17 @@ public class ApplyActivity extends AppCompatActivity {
         tvMucLuong.setText(job.getSalary());
         tvHinhThuc.setText(job.getForm());
 
-        if(job.getNumberRecruitment() !=0){
-            tvSoLuongTuyen.setText(job.getNumberRecruitment()+"");
-        }
-        else{
+        if (job.getNumberRecruitment() != 0) {
+            tvSoLuongTuyen.setText(job.getNumberRecruitment() + "");
+        } else {
             tvSoLuongTuyen.setText("Không giới hạn");
         }
 
 
-        if(job.getJobRequirement()!=null && !job.getJobRequirement().getExperience().equals("0")){
-            tvKinhNghiem.setText("> "+job.getJobRequirement().getExperience()+" năm");
-            tvKinhnghiem2.setText("> "+job.getJobRequirement().getExperience()+" năm");
-        }
-        else{
+        if (job.getJobRequirement() != null && !job.getJobRequirement().getExperience().equals("0")) {
+            tvKinhNghiem.setText("> " + job.getJobRequirement().getExperience() + " năm");
+            tvKinhnghiem2.setText("> " + job.getJobRequirement().getExperience() + " năm");
+        } else {
             tvKinhNghiem.setText("khong y/c");
             tvKinhnghiem2.setText("khong y/c");
         }
@@ -88,10 +86,10 @@ public class ApplyActivity extends AppCompatActivity {
         tvThoiGiamLamViec.setText(job.getTime().replace("\\n", "\n"));
 
         String requirment = "";
-        if(job.getJobRequirement()!=null){
-            requirment+= job.getJobRequirement().getSkillRequire();
-            requirment+= "\n";
-            requirment+= job.getJobRequirement().getExperience()+" nam kinh nghiem";
+        if (job.getJobRequirement() != null) {
+            requirment += job.getJobRequirement().getSkillRequire();
+            requirment += "\n";
+            requirment += job.getJobRequirement().getExperience() + " nam kinh nghiem";
         }
 
         tvYeuCau.setText(requirment);
@@ -111,7 +109,7 @@ public class ApplyActivity extends AppCompatActivity {
                 applicationFormDTO.setUser(userDTO);
 
                 Intent intent = new Intent(ApplyActivity.this, ConfirmApplyActivity.class);
-                intent.putExtra("applicationFormDTO",applicationFormDTO);
+                intent.putExtra("applicationFormDTO", applicationFormDTO);
                 startActivity(intent);
 
 //                 Gọi API tạo application form
@@ -149,7 +147,7 @@ public class ApplyActivity extends AppCompatActivity {
         Integer userIdnum = Integer.parseInt(userId);
         Integer jobId = job.getId();
 
-        System.out.println("userId la: "+userIdnum+", "+"jobs id la: "+jobId);
+        System.out.println("userId la: " + userIdnum + ", " + "jobs id la: " + jobId);
 
         Retrofit retrofit = RetrofitClient.getClient("http://10.0.2.2:8081");
         apiService = retrofit.create(ApiService.class);
@@ -186,13 +184,13 @@ public class ApplyActivity extends AppCompatActivity {
         });
     }
 
-    private String dateLongtoShort(String inputDate){
+    private String dateLongtoShort(String inputDate) {
         // Định dạng ban đầu của chuỗi
         SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
         // Định dạng mong muốn
         SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String  formattedDate = "22/12/2024";
+        String formattedDate = "22/12/2024";
 
         try {
             // Chuyển đổi chuỗi sang Date
@@ -213,7 +211,7 @@ public class ApplyActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("app_prefs", Context.MODE_PRIVATE);
         String userId = prefs.getString("user_id", null);
 
-        Call<Boolean> call = apiService.checkUserSaveJob(Integer.parseInt(userId),job.getId());
+        Call<Boolean> call = apiService.checkUserSaveJob(Integer.parseInt(userId), job.getId());
 
         call.enqueue(new Callback<Boolean>() {
             @Override
@@ -224,10 +222,10 @@ public class ApplyActivity extends AppCompatActivity {
 
                     // Set OnClickListener for the icon
                     ic_savedJob.setOnClickListener(v -> {
-                        if (!isSaved) {
-                            saveJob();
+                        if (isSaved) {
+                            removeSaveJob();
                         } else {
-                            Toast.makeText(ApplyActivity.this, "Công việc đã được lưu!", Toast.LENGTH_SHORT).show();
+                            saveJob();
                         }
                     });
                 }
@@ -241,6 +239,33 @@ public class ApplyActivity extends AppCompatActivity {
         });
     }
 
+
+    private void removeSaveJob() {
+        Retrofit retrofit = RetrofitClient.getClient("http://10.0.2.2:8081");
+        ApiService apiService = retrofit.create(ApiService.class);
+        SharedPreferences prefs = getSharedPreferences("app_prefs", Context.MODE_PRIVATE);
+        String userId = prefs.getString("user_id", null);
+
+        Call<Void> call = apiService.removeSaveJob(Integer.parseInt(userId), job.getId());
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    isSaved = false;
+                    updateSavedJobIcon();
+                    Toast.makeText(ApplyActivity.this, "Đã xóa công việc khỏi danh sách lưu!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(ApplyActivity.this, "Không thể xóa công việc!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("API_ERROR", "Failed to remove saved job", t);
+                Toast.makeText(ApplyActivity.this, "Lỗi khi xóa công việc!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
     private void saveJob() {
         Retrofit retrofit = RetrofitClient.getClient("http://10.0.2.2:8081");
         ApiService apiService = retrofit.create(ApiService.class);
@@ -267,6 +292,7 @@ public class ApplyActivity extends AppCompatActivity {
             }
         });
     }
+
     private void updateSavedJobIcon() {
         if (isSaved) {
             ic_savedJob.setImageResource(R.drawable.ic_bookmark);

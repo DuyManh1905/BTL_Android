@@ -1,12 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:orientation="vertical">
 
-    <ImageView
-        android:src="@drawable/download"
+    <LinearLayout
+        android:id="@+id/layoutNoneCv"
+        android:visibility="gone"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:text="Bạn chưa tạo CV!"
+            android:textSize="40sp"
+            android:textColor="@color/red"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/btnTaoCv"
+            android:text="Tạo ngay"
+            android:textSize="30dp"
+            android:background="@color/green"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+
+   <LinearLayout
+       android:id="@+id/layoutCv"
+       android:orientation="vertical"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+       <TextView
+           android:layout_marginTop="50dp"
+           android:textColor="@color/black"
+           android:layout_marginStart="38dp"
+           android:textStyle="bold"
+           android:textSize="21sp"
+           android:text="CV Của tôi"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"/>
+       <ImageView
+           android:id="@+id/imgCv"
+           android:src="@drawable/cv"
+           android:layout_width="wrap_content"
+           android:layout_height="300dp"/>
+       <TextView
+           android:id="@+id/ngayTao"
+           android:layout_marginStart="36dp"
+           android:textColor="@color/black"
+           android:textStyle="bold"
+           android:textSize="21sp"
+           android:text="Ngày tạo 27/11/2024 21:20"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"/>
+   </LinearLayout>
+
+</LinearLayout>

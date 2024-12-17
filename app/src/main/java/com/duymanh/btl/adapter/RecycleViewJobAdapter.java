@@ -75,8 +75,14 @@ public class RecycleViewJobAdapter extends RecyclerView.Adapter<RecycleViewJobAd
         holder.jobLocation.setText(job.getCompany().getName());
         holder.jobSalary.setText(job.getSalary());
         holder.jobAddress.setText(job.getJobRequirement().getArea());
-        holder.soNgayKT.setText(getDayToEnd(job.getEndAt())+"");
 
+        long numberDayEnd = getDayToEnd(job.getEndAt());
+        if(numberDayEnd<=0){
+            holder.soNgayKT.setText("Đã hết hạn ứng tuyển");
+        }
+        else{
+            holder.soNgayKT.setText(getDayToEnd(job.getEndAt())+"");
+        }
         int randomNumber = (int)(Math.random() * 5);
         int[] images = {
                 R.drawable.company1,

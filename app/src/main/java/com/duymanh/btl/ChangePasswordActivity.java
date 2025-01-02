@@ -1,8 +1,10 @@
 package com.duymanh.btl;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -18,6 +20,9 @@ public class ChangePasswordActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
+
+        getSupportActionBar().setTitle("Đổi mật khẩu");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         btnHuy = findViewById(R.id.btnHuyDK);
         btnLuu = findViewById(R.id.btnLuu);
@@ -52,5 +57,15 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 }, 1500); // 2000ms tương đương với 2 giây
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            // Trở về activity trước đó
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

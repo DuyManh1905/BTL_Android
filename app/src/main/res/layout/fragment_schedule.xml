@@ -29,7 +29,7 @@
                 android:layout_marginTop="10dp"
                 android:textStyle="bold"
                 android:textSize="20sp"
-                android:text="Danh sách công ty"
+                android:text="Danh sách top 10 công ty"
                 android:layout_marginLeft="20dp"
                 android:textColor="@color/black"
                 android:layout_width="0dp"
@@ -38,6 +38,7 @@
                 android:gravity="start" />
 
             <TextView
+                android:id="@+id/tvXemTatCa"
                 android:textSize="14dp"
                 android:textStyle="bold"
                 android:textColor="@color/green"

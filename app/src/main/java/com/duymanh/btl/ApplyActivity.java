@@ -1,5 +1,6 @@
 package com.duymanh.btl;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -8,12 +9,14 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.duymanh.btl.api.ApiService;
 import com.duymanh.btl.api.ResponseDTO;
 import com.duymanh.btl.api.RetrofitClient;
@@ -21,6 +24,7 @@ import com.duymanh.btl.dto.ApplicationFormDTO;
 import com.duymanh.btl.dto.JobDTO;
 import com.duymanh.btl.dto.UserDTO;
 import com.duymanh.btl.model.Job;
+import com.google.android.material.imageview.ShapeableImageView;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -37,6 +41,8 @@ public class ApplyActivity extends AppCompatActivity {
     private TextView tvDiaDiemLamViec, tvThoiGiamLamViec, tvYeuCau, tvQuyenLoi;
     private TextView tvDescription, tvCompany, tvJobName, tvDiaChi, tvKinhNghiem, tvMucLuong, tvKinhnghiem2, tvHinhThuc, tvSoLuongTuyen, tvGioiTinh, tvCapBac, tvHanNop;
     private Button btnApply;
+    private ShapeableImageView imgAvtCompany;
+    private ImageView imgAvtCoverCompany;
 
     private ImageView ic_savedJob;
     private Job job;
@@ -50,6 +56,9 @@ public class ApplyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_apply);
+
+        getSupportActionBar().setTitle("Thông tin công việc");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent intent = getIntent();
         job = (Job) intent.getSerializableExtra("item");
@@ -82,18 +91,10 @@ public class ApplyActivity extends AppCompatActivity {
         tvGioiTinh.setText(job.getJobRequirement().getSex());
         tvCapBac.setText(job.getRanking());
         tvHanNop.setText(dateLongtoShort(job.getEndAt()));
-        tvDiaDiemLamViec.setText(job.getArea());
-        tvThoiGiamLamViec.setText(job.getTime().replace("\\n", "\n"));
+        tvDiaDiemLamViec.setText(job.getWorkLocation());
+        tvThoiGiamLamViec.setText(job.getTime());
 
-        String requirment = "";
-        if (job.getJobRequirement() != null) {
-            requirment += job.getJobRequirement().getSkillRequire();
-            requirment += "\n";
-            requirment += job.getJobRequirement().getExperience() + " nam kinh nghiem";
-        }
-
-        tvYeuCau.setText(requirment);
-        tvQuyenLoi.setText(job.getInterest().replace("\\n", "\n"));
+        tvQuyenLoi.setText(job.getInterest());
 
         btnApply.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,9 +119,18 @@ public class ApplyActivity extends AppCompatActivity {
         });
     }
 
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            // Trở về activity trước đó
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     private void initView() {
         tvQuyenLoi = findViewById(R.id.tvQuyenLoi);
-        tvYeuCau = findViewById(R.id.tvYeuCau);
         tvThoiGiamLamViec = findViewById(R.id.tvThoiGiamLamViec);
         tvDiaDiemLamViec = findViewById(R.id.tvDiaDiemLamViec);
         tvHanNop = findViewById(R.id.tvHanNop);
@@ -137,6 +147,25 @@ public class ApplyActivity extends AppCompatActivity {
         tvCompany = findViewById(R.id.tvCompanyName);
         btnApply = findViewById(R.id.btnApply);
         ic_savedJob = findViewById(R.id.ic_savedJob);
+
+        imgAvtCoverCompany = findViewById(R.id.imgAvtCoverCompany);
+        imgAvtCompany = findViewById(R.id.imgAvtCompany);
+
+        String imageUrl = job.getCompany().getAvataURL();
+        String imageCoverUrl = job.getCompany().getImageCoverURL();
+
+        Glide.with(this)
+                .load(imageUrl)
+                .placeholder(R.drawable.company2) // Hình ảnh mặc định khi tải
+                .error(R.drawable.company2)       // Hình ảnh khi có lỗi
+                .into(imgAvtCompany);
+
+        Glide.with(this)
+                .load(imageCoverUrl)
+                .placeholder(R.drawable.company_cover) // Hình ảnh mặc định khi tải
+                .error(R.drawable.company_cover)       // Hình ảnh khi có lỗi
+                .into(imgAvtCoverCompany);
+
         checkApply();
         checkJobSavedStatus();
     }

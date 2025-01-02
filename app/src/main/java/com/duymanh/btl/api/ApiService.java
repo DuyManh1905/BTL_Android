@@ -2,8 +2,11 @@ package com.duymanh.btl.api;
 
 import com.duymanh.btl.dto.ApplicationFormDTO;
 import com.duymanh.btl.dto.JobSuggestionDTO;
+import com.duymanh.btl.model.Company;
 import com.duymanh.btl.model.Cv;
 import com.duymanh.btl.model.User;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -28,6 +31,9 @@ public interface ApiService {
 
     @GET("/api/company/all")
     Call<ApiResponseCompany> getAllCompany();
+
+    @GET("api/company/all-mobile")
+    Call<List<Company>> searchAll(@Query("title") String title);
 
     @GET("/api/applicationform/mobile/user")
     Call<ApiResponseApplycationForm> getAllApplycationForm(
@@ -58,11 +64,34 @@ public interface ApiService {
             @Path("userId") int userId
     );
 
+    @GET("api/company/is-following")
+    Call<Boolean> checkFollow(
+            @Query("userId") int userId,
+            @Query("companyId") int companyId
+    );
+
+
+    @POST("api/user/{userId}/follow/{companyId}")
+    Call<Void> followCompany(@Path("userId") int userId, @Path("companyId") int companyId);
+
+    @DELETE("/api/user/{userId}/unfollow/{companyId}")
+    Call<Void> unFollowCompany(@Path("userId") int userId, @Path("companyId") int companyId);
+
+
     @POST("/api/login")
     Call<ResponseDTO<String>> login(
             @Query("username") String username,
             @Query("password") String password
     );
+
+    @GET("api/company/count-followers")
+    Call<Integer> getNumberFollow(@Query("companyId") int companyId);
+
+    @GET("api/company/followed-companies")
+    Call<ResponseDTO<List<Company>>> getAllFollowCompanies(@Query("userId") int userId);
+
+    @GET("api/user/count-followed-companies")
+    Call<Integer> getNumberFollowCompanyByUser(@Query("userId") int userId);
 
     @GET("/api/job/searchcompany")
     Call<ApiResponseJobFitCompany> getAllJobByCompany(@Query("idCompany") int id);
@@ -86,6 +115,11 @@ public interface ApiService {
     @POST("/api/applicationform/dashboard/create")
     Call<ResponseDTO<ApplicationFormDTO>> createApplicationForm(@Body ApplicationFormDTO applicationFormDTO);
 
+    @POST("api/cv/create")
+    Call<ResponseDTO<Cv>> createCv(@Body Cv cv);
+
+    @PUT("api/cv/update")
+    Call<ResponseDTO<Cv>> updateCv(@Body Cv cv);
 
     @PUT("api/cv/update-job-suggess")
     Call<ResponseDTO<JobSuggestionDTO>> updateSuggestionCv(@Body JobSuggestionDTO jobSuggestionDTO);

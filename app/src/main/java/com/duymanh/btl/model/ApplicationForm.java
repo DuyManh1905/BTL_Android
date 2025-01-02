@@ -15,6 +15,8 @@ public class ApplicationForm implements Serializable {
 
     private User user;
 
+    private int status;
+
     // Constructor không tham số
     public ApplicationForm() {}
 
@@ -57,5 +59,13 @@ public class ApplicationForm implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

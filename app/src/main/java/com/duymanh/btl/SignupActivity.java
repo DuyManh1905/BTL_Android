@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +29,8 @@ public class SignupActivity extends AppCompatActivity {
     private Button btnSignup;
     private ApiService apiService;
 
+    private TextView signIn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,11 +42,17 @@ public class SignupActivity extends AppCompatActivity {
         edPassword = findViewById(R.id.edPassword);
         edRePassword = findViewById(R.id.edRePassword);
         btnSignup = findViewById(R.id.btnSignup);
+        signIn = findViewById(R.id.signIn);
 
         // Khởi tạo Retrofit và ApiService
         Retrofit retrofit = RetrofitClient.getClient("http://10.0.2.2:8081");
         apiService = retrofit.create(ApiService.class);
 
+
+        signIn.setOnClickListener(v -> {
+            Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+            startActivity(intent);
+        });
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

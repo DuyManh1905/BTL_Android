@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.duymanh.btl.ApplyActivity;
 import com.duymanh.btl.CompanyActivity;
 import com.duymanh.btl.R;
+import com.duymanh.btl.SearchCompanyActivity;
 import com.duymanh.btl.adapter.RecycleViewCompanyAdapter;
 
 import com.duymanh.btl.api.ApiResponseCompany;
@@ -45,6 +46,8 @@ public class FragmentSchedule extends Fragment implements RecycleViewCompanyAdap
     private RecycleViewCompanyAdapter adapter;
     private RecyclerView recyclerView;
     private Spinner spCategory;
+
+    private TextView tvXemTatCa;
 
 
     @Nullable
@@ -72,6 +75,11 @@ public class FragmentSchedule extends Fragment implements RecycleViewCompanyAdap
 
 
     private void initView(View view) {
+        tvXemTatCa = view.findViewById(R.id.tvXemTatCa);
+        tvXemTatCa.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), SearchCompanyActivity.class);
+            startActivity(intent);
+        });
     }
 
 

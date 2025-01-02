@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">BTL</string>
-    <string name="my_map_api_key">AIzaSyBnHGNoiS7upilxPTK_g_T4Ek87NfuYIVA</string>
+    <string name="my_map_api_key">AIzaSyBSnvGFhHbEFzkP-VT9VSrl9Gq2sG4vyyY</string>
 
     <string-array name="category">
         <item>Học tập</item>
@@ -21,7 +21,7 @@
     <string-array name="khuVuc">
         <item>Tất cả</item>
         <item>Hà Nội</item>
-        <item>TP HCM</item>
+        <item>TP. Hồ Chí Minh</item>
         <item>Đà Nẵng</item>
         <item>Nam Định</item>
     </string-array>
@@ -43,11 +43,18 @@
         <item>Hơn 5 năm</item>
     </string-array>
     <string-array name="cong_viec_mong_muon">
-        <item>Dev Back-end</item>
-        <item>Quản lý dự án</item>
-        <item>Nhà thiết kế</item>
+        <item>AI</item>
+        <item>Tester</item>
+        <item>Embedded</item>
+        <item>Frontend</item>
+        <item>Backend</item>
+        <item>Fullstack</item>
+        <item>Android</item>
+        <item>UI/UX</item>
+        <item>Security</item>
     </string-array>
     <string-array name="dia_diem_lam_viec">
+        <item>Tất cả</item>
         <item>Hà Nội</item>
         <item>TP. Hồ Chí Minh</item>
         <item>Đà Nẵng</item>
@@ -55,11 +62,15 @@
 
     <string-array name="chuyenNganh">
         <item>Tất cả</item>
-        <item>IT</item>
-        <item>Điện tử</item>
-        <item>Nhúng</item>
+        <item>AI</item>
+        <item>Tester</item>
+        <item>Embedded</item>
+        <item>Frontend</item>
+        <item>Backend</item>
+        <item>Fullstack</item>
         <item>Android</item>
-        <item>Web/App</item>
+        <item>UI/UX</item>
+        <item>Security</item>
     </string-array>
 
     <string name="days_remaining">Còn <b>18</b> ngày để ứng tuyển</string>

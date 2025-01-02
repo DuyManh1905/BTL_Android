@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/mHome"
-        android:title="Home"
+        android:title="Job"
         android:icon="@drawable/ic_button_home"/>
 
     <item android:id="@+id/mSchedule"
@@ -9,8 +9,8 @@
         android:icon="@drawable/ic_button_schedule"/>
 
     <item android:id="@+id/mMess"
-        android:title="Mess"
-        android:icon="@drawable/ic_button_mess"/>
+        android:title="Cv"
+        android:icon="@drawable/ic_cv2"/>
 
     <item android:id="@+id/mUser"
         android:title="User"

@@ -11,11 +11,13 @@
         android:orientation="vertical">
 
         <ImageView
-            android:src="@drawable/company_cover1"
+            android:id="@+id/imageBackground"
+            android:src="@drawable/company_cover"
             android:layout_width="match_parent"
             android:layout_height="200dp"/>
 
         <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/avt_company"
             android:layout_marginTop="-50dp"
             android:layout_gravity="center"
             android:layout_width="90dp"
@@ -63,6 +65,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"/>
             <TextView
+                android:id="@+id/tvNumberFollow"
                 android:textColor="@color/black"
                 android:textSize="13dp"
                 android:text="  15 người theo dõi        "
@@ -83,6 +86,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tvFollow"
             android:padding="5dp"
             android:layout_marginBottom="20dp"
             android:layout_marginTop="10dp"

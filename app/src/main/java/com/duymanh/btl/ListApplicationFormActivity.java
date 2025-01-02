@@ -1,5 +1,6 @@
 package com.duymanh.btl;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -40,6 +42,9 @@ public class ListApplicationFormActivity extends AppCompatActivity implements Re
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_application_form);
 
+        getSupportActionBar().setTitle("Công việc đã ứng tuyển");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         recyclerView = findViewById(R.id.recycleViewApply);
         initView();
 
@@ -50,6 +55,16 @@ public class ListApplicationFormActivity extends AppCompatActivity implements Re
         recyclerView.setAdapter(adapter);
         adapter.setItemListener(this);
         getAllApplicationForm();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            // Trở về activity trước đó
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void getAllApplicationForm() {

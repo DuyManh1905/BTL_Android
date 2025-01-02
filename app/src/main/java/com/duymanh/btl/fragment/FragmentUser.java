@@ -20,13 +20,16 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.auth0.android.jwt.JWT;
+import com.bumptech.glide.Glide;
 import com.duymanh.btl.ChangePasswordActivity;
 import com.duymanh.btl.ConfirmApplyActivity;
 import com.duymanh.btl.JobSavedActivity;
 import com.duymanh.btl.ListApplicationFormActivity;
+import com.duymanh.btl.ListFollowCompanyActivity;
 import com.duymanh.btl.LoginActivity;
 import com.duymanh.btl.R;
 import com.duymanh.btl.SuccessActivity;
+import com.duymanh.btl.TestImageActivity;
 import com.duymanh.btl.api.ApiService;
 import com.duymanh.btl.api.ResponseDTO;
 import com.duymanh.btl.api.RetrofitClient;
@@ -37,6 +40,7 @@ import com.duymanh.btl.model.User;
 
 import java.io.IOException;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -57,6 +61,8 @@ public class FragmentUser extends Fragment {
 
     private boolean isEditingKinhNghiem = false;
     private TextView tvKinhNghiem, btnSuaKinhNghiem;
+
+    private CircleImageView avt_user;
     private Spinner spinnerKinhNghiem;
 
     private boolean isEditingCongViecMongMuon = false;
@@ -88,6 +94,7 @@ public class FragmentUser extends Fragment {
             fetchApplicationFormCount(parsedUserId); // Gọi phương thức fetchApplicationFormCount
             fetchSavedJobsCount(parsedUserId);
             fetchCvData(parsedUserId);
+            fetchFollowCompanyCount(parsedUserId);
         }
 
         //sua kinh nghiem
@@ -199,8 +206,6 @@ public class FragmentUser extends Fragment {
 
 
 
-
-
         numberviecLamPhuHop.setText("30");
         numberCongTyDangTheoDoi.setText("4");
 
@@ -215,11 +220,15 @@ public class FragmentUser extends Fragment {
         });
 
         viecLamPhuHop.setOnClickListener(v -> {
-            Toast.makeText(getContext(),"numberviecLamPhuHop",Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getContext(),"numberviecLamPhuHop",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getContext(), TestImageActivity.class);
+            startActivity(intent);
         });
 
+
         congTyDangTheoDoi.setOnClickListener(v -> {
-            Toast.makeText(getContext(),"numberCongTyDangTheoDoi",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getContext(), ListFollowCompanyActivity.class);
+            startActivity(intent);
         });
 
         changePassword.setOnClickListener(v -> {
@@ -247,6 +256,27 @@ public class FragmentUser extends Fragment {
         return view;
     }
 
+    private void fetchFollowCompanyCount(int userId) {
+        apiService.getNumberFollowCompanyByUser(userId).enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    // Lấy số lượng từ response và cập nhật TextView
+                    int count = response.body();
+                    numberCongTyDangTheoDoi.setText(String.valueOf(count));
+                } else {
+                    Toast.makeText(getContext(), "Không lấy được số lượng việc làm đã ứng tuyển.", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+                Toast.makeText(getContext(), "Lỗi khi gọi API: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e("API_ERROR", "Error fetching application form count", t);
+            }
+        });
+    }
+
     private void initView(View view) {
         btnLogOut = view.findViewById(R.id.btnLogout);
         changePassword = view.findViewById(R.id.changePassword);
@@ -271,6 +301,11 @@ public class FragmentUser extends Fragment {
 
         nameUser = view.findViewById(R.id.nameUser);
         email = view.findViewById(R.id.email);
+
+        avt_user = view.findViewById(R.id.avt_user);
+
+
+
     }
 
     private void fetchUserData(int userId) {
@@ -282,6 +317,14 @@ public class FragmentUser extends Fragment {
                     nameUser.setText(user.getName());
                     email.setText(user.getEmail());
                     email.setTextColor(getResources().getColor(R.color.green));
+
+                    String imageUrl = user.getAvataURL();
+                    // Hiển thị ảnh với Glide
+                    Glide.with(getActivity())
+                            .load(imageUrl)
+                            .placeholder(R.drawable.avt_user)
+                            .error(R.drawable.avt_user)
+                            .into(avt_user);
                 }
             }
             @Override

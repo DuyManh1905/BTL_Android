@@ -17,11 +17,13 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/imgAvtCoverCompany"
                 android:src="@drawable/company_cover1"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"/>
 
             <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imgAvtCompany"
                 android:layout_marginTop="-50dp"
                 android:layout_gravity="center"
                 android:layout_width="90dp"
@@ -365,21 +367,6 @@
                 android:text="Job description goes here" />
 
             <!-- Salary -->
-            <TextView
-                android:id="@+id/tvSalaryLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Yêu cầu ứng  viên"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:paddingTop="8dp"
-                android:paddingBottom="4dp" />
-
-            <TextView
-                android:id="@+id/tvYeuCau"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Salary amount" />
 
             <!-- Start Date -->
             <TextView

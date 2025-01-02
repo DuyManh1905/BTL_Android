@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.duymanh.btl.R;
 import com.duymanh.btl.api.ApiService;
 import com.duymanh.btl.api.RetrofitClient;
@@ -83,15 +84,12 @@ public class RecycleViewJobAdapter extends RecyclerView.Adapter<RecycleViewJobAd
         else{
             holder.soNgayKT.setText(getDayToEnd(job.getEndAt())+"");
         }
-        int randomNumber = (int)(Math.random() * 5);
-        int[] images = {
-                R.drawable.company1,
-                R.drawable.company2,
-                R.drawable.company3,
-                R.drawable.company4,
-                R.drawable.company5
-        };
-        holder.imgCompany.setImageResource(images[randomNumber]);
+        String imageUrl = job.getCompany().getAvataURL();
+        Glide.with(holder.itemView.getContext())
+                .load(imageUrl)
+                .placeholder(R.drawable.company2) // Hình ảnh mặc định khi tải
+                .error(R.drawable.company2)       // Hình ảnh khi có lỗi
+                .into(holder.imgCompany);
 
         if(job.getJobRequirement()!=null && !job.getJobRequirement().getExperience().equals("0")){
             holder.jobExperience.setText("> "+job.getJobRequirement().getExperience()+" năm kinh nghiệm");

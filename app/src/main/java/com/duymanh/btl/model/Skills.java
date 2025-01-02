@@ -3,7 +3,7 @@ package com.duymanh.btl.model;
 import java.io.Serializable;
 
 public class Skills implements Serializable {
-    private int id;
+    private Integer id;
 
     private String name;
 
@@ -11,6 +11,20 @@ public class Skills implements Serializable {
 
     public Skills(int id, String name, String description) {
         this.id = id;
+        this.name = name;
+        this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Skills{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
+
+    public Skills(String name, String description) {
         this.name = name;
         this.description = description;
     }

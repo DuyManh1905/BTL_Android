@@ -169,5 +169,12 @@
                     android:layout_height="wrap_content"/>
             </LinearLayout>
         </LinearLayout>
+        <Button
+            android:id="@+id/status"
+            android:text="Đang chờ được xét"
+            android:textStyle="bold"
+            android:textColor="@color/red"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

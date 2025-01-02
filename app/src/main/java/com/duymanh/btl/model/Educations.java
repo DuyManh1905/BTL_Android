@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Educations implements Serializable {
 
-    private int id;
+    private Integer id;
 
     private String major;
 
@@ -18,6 +18,14 @@ public class Educations implements Serializable {
 
     public Educations(int id, String major, String school, String startAt, String endAt, String description) {
         this.id = id;
+        this.major = major;
+        this.school = school;
+        this.startAt = startAt;
+        this.endAt = endAt;
+        this.description = description;
+    }
+
+    public Educations(String major, String school, String startAt, String endAt, String description) {
         this.major = major;
         this.school = school;
         this.startAt = startAt;
@@ -71,5 +79,17 @@ public class Educations implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Educations{" +
+                "id=" + id +
+                ", major='" + major + '\'' +
+                ", school='" + school + '\'' +
+                ", startAt='" + startAt + '\'' +
+                ", endAt='" + endAt + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

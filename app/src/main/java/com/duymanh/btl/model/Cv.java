@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Cv implements Serializable {
-    private int id;
+    private Integer id;
     private String name;
     private String description;
     private int isPublic;
@@ -14,6 +14,7 @@ public class Cv implements Serializable {
     private String desiredJob;
     //dia diem lam viec mong muon
     private String desiredWorkLocation;
+    private User user;
 
     private List<Activities> activities;
 
@@ -39,7 +40,10 @@ public class Cv implements Serializable {
 
     private List<Project> projects;
 
-    public Cv(int id, String name, String description, int isPublic, String createAt, String updateCreatAt, String desiredJob, String desiredWorkLocation, List<Activities> activities, List<AdditionalInformation> additionalInformations, List<Awards> awards, List<BusinessCard> businessCards, List<Certificates> certificates, List<Educations> educations, List<Experiences> experiences, List<Hobbies> hobbies, List<Introducer> introducers, Profile profile, List<Skills> skills, List<Project> projects) {
+    public Cv() {
+    }
+
+    public Cv(int id, String name, String description, int isPublic, String createAt, String updateCreatAt, String desiredJob, String desiredWorkLocation, User user, List<Activities> activities, List<AdditionalInformation> additionalInformations, List<Awards> awards, List<BusinessCard> businessCards, List<Certificates> certificates, List<Educations> educations, List<Experiences> experiences, List<Hobbies> hobbies, List<Introducer> introducers, Profile profile, List<Skills> skills, List<Project> projects) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -48,6 +52,7 @@ public class Cv implements Serializable {
         this.updateCreatAt = updateCreatAt;
         this.desiredJob = desiredJob;
         this.desiredWorkLocation = desiredWorkLocation;
+        this.user = user;
         this.activities = activities;
         this.additionalInformations = additionalInformations;
         this.awards = awards;
@@ -60,6 +65,14 @@ public class Cv implements Serializable {
         this.profile = profile;
         this.skills = skills;
         this.projects = projects;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public int getId() {
@@ -220,5 +233,31 @@ public class Cv implements Serializable {
 
     public void setProjects(List<Project> projects) {
         this.projects = projects;
+    }
+
+    @Override
+    public String toString() {
+        return "Cv{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", isPublic=" + isPublic +
+                ", createAt='" + createAt + '\'' +
+                ", updateCreatAt='" + updateCreatAt + '\'' +
+                ", desiredJob='" + desiredJob + '\'' +
+                ", desiredWorkLocation='" + desiredWorkLocation + '\'' +
+                ", activities=" + activities +
+                ", additionalInformations=" + additionalInformations +
+                ", awards=" + awards +
+                ", businessCards=" + businessCards +
+                ", certificates=" + certificates +
+                ", educations=" + educations +
+                ", experiences=" + experiences +
+                ", hobbies=" + hobbies +
+                ", introducers=" + introducers +
+                ", profile=" + profile +
+                ", skills=" + skills +
+                ", projects=" + projects +
+                '}';
     }
 }

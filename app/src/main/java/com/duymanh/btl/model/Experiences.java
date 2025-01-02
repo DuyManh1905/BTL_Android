@@ -3,7 +3,7 @@ package com.duymanh.btl.model;
 import java.io.Serializable;
 
 public class Experiences implements Serializable {
-    private int id;
+    private Integer id;
 
     private String position; //vi tri
 
@@ -11,12 +11,32 @@ public class Experiences implements Serializable {
 
     private String startAt;
 
+    @Override
+    public String toString() {
+        return "Experiences{" +
+                "id=" + id +
+                ", position='" + position + '\'' +
+                ", company='" + company + '\'' +
+                ", startAt='" + startAt + '\'' +
+                ", endAt='" + endAt + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
+
     private String endAt;
 
     private String description;
 
     public Experiences(int id, String position, String company, String startAt, String endAt, String description) {
         this.id = id;
+        this.position = position;
+        this.company = company;
+        this.startAt = startAt;
+        this.endAt = endAt;
+        this.description = description;
+    }
+
+    public Experiences(String position, String company, String startAt, String endAt, String description) {
         this.position = position;
         this.company = company;
         this.startAt = startAt;

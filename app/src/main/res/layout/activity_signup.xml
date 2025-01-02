@@ -93,16 +93,17 @@
         android:layout_height="wrap_content">
         <TextView
             android:textSize="16dp"
-            android:text="Don't have an account?   "
+            android:text="You have an account?   "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
+            android:id="@+id/signIn"
             android:textSize="15dp"
             android:textStyle="bold"
             android:textColor="#0000ff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Signup"/>
+            android:text="Sign In"/>
     </LinearLayout>
 
     <TextView

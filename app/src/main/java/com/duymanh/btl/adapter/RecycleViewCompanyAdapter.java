@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.duymanh.btl.R;
 import com.duymanh.btl.model.Company;
 
@@ -61,16 +62,12 @@ public class RecycleViewCompanyAdapter extends RecyclerView.Adapter<RecycleViewC
             holder.companyType.setText("IT - Phần mềm");
         }
 
-        Random r = new Random();
-        int randomNumber = (int)(Math.random() * 5);
-        int[] images = {
-                R.drawable.company1,
-                R.drawable.company2,
-                R.drawable.company3,
-                R.drawable.company4,
-                R.drawable.company5
-        };
-        holder.iconCompany.setImageResource(images[randomNumber]);
+        String imageUrl = company.getAvataURL();
+        Glide.with(holder.itemView.getContext())
+                .load(imageUrl)
+                .placeholder(R.drawable.company2) // Hình ảnh mặc định khi tải
+                .error(R.drawable.company2)       // Hình ảnh khi có lỗi
+                .into(holder.iconCompany);
     }
 
     @Override

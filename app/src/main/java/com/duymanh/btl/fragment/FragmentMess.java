@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.duymanh.btl.AddCvActivity;
 import com.duymanh.btl.CvActivity;
 import com.duymanh.btl.R;
 import com.duymanh.btl.api.ApiService;
@@ -65,6 +66,11 @@ public class FragmentMess extends Fragment {
 
         imgCv.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), CvActivity.class);
+            startActivity(intent);
+        });
+
+        btnTaoCv.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), AddCvActivity.class);
             startActivity(intent);
         });
     }

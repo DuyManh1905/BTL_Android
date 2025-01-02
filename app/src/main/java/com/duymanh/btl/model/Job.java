@@ -15,7 +15,7 @@ public class Job implements Serializable {
     private String ranking;
 
     //dia diem lam viec
-    private String area;
+    private String workLocation;
 
     //thoi gian lam viec
     private String time;
@@ -33,7 +33,7 @@ public class Job implements Serializable {
     public Job() {
     }
 
-    public Job(int id, String title, String startAt, String endAt, String desciption, String form, int numberRecruitment, String ranking, String area, String time, String salary, Company company, CateJob cateJob, JobRequirement jobRequirement, String interest) {
+    public Job(int id, String title, String startAt, String endAt, String desciption, String form, int numberRecruitment, String ranking, String workLocation, String time, String salary, Company company, CateJob cateJob, JobRequirement jobRequirement, String interest) {
         this.id = id;
         this.title = title;
         this.startAt = startAt;
@@ -42,7 +42,7 @@ public class Job implements Serializable {
         this.form = form;
         this.numberRecruitment = numberRecruitment;
         this.ranking = ranking;
-        this.area = area;
+        this.workLocation = workLocation;
         this.time = time;
         this.salary = salary;
         this.company = company;
@@ -123,12 +123,12 @@ public class Job implements Serializable {
         this.ranking = ranking;
     }
 
-    public String getArea() {
-        return area;
+    public String getWorkLocation() {
+        return workLocation;
     }
 
-    public void setArea(String area) {
-        this.area = area;
+    public void setWorkLocation(String workLocation) {
+        this.workLocation = workLocation;
     }
 
     public String getTime() {

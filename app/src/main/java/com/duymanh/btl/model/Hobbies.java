@@ -3,12 +3,24 @@ package com.duymanh.btl.model;
 import java.io.Serializable;
 
 public class Hobbies implements Serializable {
-    private int id;
+    private Integer id;
 
     private String name;
 
     public Hobbies(int id, String name) {
         this.id = id;
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Hobbies{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
+    public Hobbies(String name) {
         this.name = name;
     }
 

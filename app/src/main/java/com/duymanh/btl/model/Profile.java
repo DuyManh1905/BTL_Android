@@ -3,13 +3,28 @@ package com.duymanh.btl.model;
 import java.io.Serializable;
 
 public class Profile implements Serializable {
-    private int id;
+    private Integer id;
 
     private String name;
 
     private String gender;	//gioi tinh
 
     private String dateBirth;
+
+    @Override
+    public String toString() {
+        return "Profile{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", gender='" + gender + '\'' +
+                ", dateBirth='" + dateBirth + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", address='" + address + '\'' +
+                ", email='" + email + '\'' +
+                ", website='" + website + '\'' +
+                ", avatarBase64='" + avatarBase64 + '\'' +
+                '}';
+    }
 
     private String phoneNumber;
 
@@ -23,6 +38,17 @@ public class Profile implements Serializable {
 
     public Profile(int id, String name, String gender, String dateBirth, String phoneNumber, String address, String email, String website, String avatarBase64) {
         this.id = id;
+        this.name = name;
+        this.gender = gender;
+        this.dateBirth = dateBirth;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.email = email;
+        this.website = website;
+        this.avatarBase64 = avatarBase64;
+    }
+
+    public Profile(String name, String gender, String dateBirth, String phoneNumber, String address, String email, String website, String avatarBase64) {
         this.name = name;
         this.gender = gender;
         this.dateBirth = dateBirth;

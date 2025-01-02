@@ -14,35 +14,101 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.BTL"
+        android:theme="@style/Base.Theme.BTL2"
         tools:targetApi="31">
         <activity
-            android:name=".MapActivity"
+            android:name=".FogotPassWordActivity"
             android:exported="false" />
+        <activity
+            android:name=".SearchCompanyActivity"
+            android:exported="false"
+            android:theme="@style/Base.Theme.BTL" />
+        <activity
+            android:name=".TestImageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ListFollowCompanyActivity"
+            android:exported="false"
+            android:theme="@style/Base.Theme.BTL" />
+        <activity
+            android:name=".cv_activity.CvIntroducerActivity"
+            android:exported="false"
+            android:theme="@style/Base.Theme.BTL" />
+        <activity
+            android:name=".cv_activity.CvHobbyActivity"
+            android:exported="false"
+            android:theme="@style/Base.Theme.BTL" />
+        <activity
+            android:name=".cv_activity.CvAwardActivity"
+            android:exported="false"
+            android:theme="@style/Base.Theme.BTL" />
+        <activity
+            android:name=".cv_activity.CvCertificateActivity"
+            android:exported="false"
+            android:theme="@style/Base.Theme.BTL" />
+        <activity
+            android:name=".cv_activity.CvProjectActivity"
+            android:exported="false"
+            android:theme="@style/Base.Theme.BTL" />
+        <activity
+            android:name=".cv_activity.CvSkillActivity"
+            android:exported="false"
+            android:theme="@style/Base.Theme.BTL" />
+        <activity
+            android:name=".cv_activity.CvExperienceActivity"
+            android:exported="false"
+            android:theme="@style/Base.Theme.BTL" />
+        <activity
+            android:name=".cv_activity.CvEducationActivity"
+            android:exported="false"
+            android:theme="@style/Base.Theme.BTL" />
+        <activity
+            android:name=".cv_activity.CvDescriberActivity"
+            android:exported="false"
+            android:theme="@style/Base.Theme.BTL" />
+        <activity
+            android:name=".cv_activity.CvProfileActivity"
+            android:exported="false"
+            android:theme="@style/Base.Theme.BTL" />
+        <activity
+            android:name=".AddCvActivity"
+            android:exported="false"
+            android:theme="@style/Base.Theme.BTL" />
+        <activity
+            android:name=".MapActivity"
+            android:exported="false"
+            android:theme="@style/Base.Theme.BTL" />
         <activity
             android:name=".EditCvActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Base.Theme.BTL" />
         <activity
             android:name=".CvActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Base.Theme.BTL" />
         <activity
             android:name=".JobSavedActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Base.Theme.BTL" />
         <activity
             android:name=".ListApplicationFormActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Base.Theme.BTL" />
         <activity
             android:name=".ChangePasswordActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Base.Theme.BTL" />
         <activity
             android:name=".SearchActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Base.Theme.BTL" />
         <activity
             android:name=".ConfirmApplyActivity"
             android:exported="false" />
         <activity
             android:name=".CompanyActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Base.Theme.BTL" />
         <activity
             android:name=".SuccessActivity"
             android:exported="false" />
@@ -63,7 +129,8 @@
             android:exported="false" />
         <activity
             android:name=".ApplyActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Base.Theme.BTL" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />

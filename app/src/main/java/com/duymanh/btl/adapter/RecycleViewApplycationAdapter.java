@@ -1,13 +1,16 @@
 package com.duymanh.btl.adapter;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.duymanh.btl.R;
@@ -63,6 +66,15 @@ public class RecycleViewApplycationAdapter extends RecyclerView.Adapter<RecycleV
         holder.job_salary.setText(applicationForm.getJob().getSalary());
         holder.job_end_date.setText(convertDate(applicationForm.getJob().getEndAt()));
 
+        if (applicationForm.getStatus() == 0) {
+            holder.status.setText("Đang chờ được xét");
+        } else if (applicationForm.getStatus() == 1) {
+            holder.status.setText("Đã được chấp nhận");
+            holder.status.setBackgroundResource(R.drawable.normal_button_green);
+            holder.status.setTextColor(Color.WHITE); // Đổi màu chữ thành trắng
+        }
+
+
         Random r = new Random();
         int randomNumber = (int)(Math.random() * 5);
         int[] images = {
@@ -85,6 +97,8 @@ public class RecycleViewApplycationAdapter extends RecyclerView.Adapter<RecycleV
         private ImageView imgCompany;
         private LinearLayout xemCongTy, xemLaiCV;
 
+        private Button status;
+
         public HomeViewHolder(@NonNull View view) {
             super(view);
             companyName = view.findViewById(R.id.company_name);
@@ -95,6 +109,7 @@ public class RecycleViewApplycationAdapter extends RecyclerView.Adapter<RecycleV
             imgCompany = view.findViewById(R.id.imgCompany);
             xemCongTy = view.findViewById(R.id.xemCongTy);
             xemLaiCV = view.findViewById(R.id.xemCV);
+            status = view.findViewById(R.id.status);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

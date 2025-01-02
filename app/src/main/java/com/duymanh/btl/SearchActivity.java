@@ -1,5 +1,6 @@
 package com.duymanh.btl;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
@@ -45,6 +47,10 @@ public class SearchActivity extends AppCompatActivity implements RecycleViewJobA
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        getSupportActionBar().setTitle("Tìm kiếm công việc");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         initView();
         recyclerView = findViewById(R.id.recycleView);
         adapter = new RecycleViewJobAdapter(this);
@@ -54,6 +60,16 @@ public class SearchActivity extends AppCompatActivity implements RecycleViewJobA
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
         adapter.setItemListener(this);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            // Trở về activity trước đó
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void initView() {

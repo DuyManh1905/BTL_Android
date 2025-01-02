@@ -23,6 +23,7 @@
             android:orientation="horizontal">
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/avt_user"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_gravity="center"

@@ -3,11 +3,26 @@ package com.duymanh.btl.model;
 import java.io.Serializable;
 
 public class Project implements Serializable {
-    private int id;
+    private Integer id;
 
     private String name;
 
     private String customer;
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", customer='" + customer + '\'' +
+                ", teamSize='" + teamSize + '\'' +
+                ", position='" + position + '\'' +
+                ", technologies='" + technologies + '\'' +
+                ", startAt='" + startAt + '\'' +
+                ", endAt='" + endAt + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 
     private String teamSize;
 
@@ -23,6 +38,17 @@ public class Project implements Serializable {
 
     public Project(int id, String name, String customer, String teamSize, String position, String technologies, String startAt, String endAt, String description) {
         this.id = id;
+        this.name = name;
+        this.customer = customer;
+        this.teamSize = teamSize;
+        this.position = position;
+        this.technologies = technologies;
+        this.startAt = startAt;
+        this.endAt = endAt;
+        this.description = description;
+    }
+
+    public Project(String name, String customer, String teamSize, String position, String technologies, String startAt, String endAt, String description) {
         this.name = name;
         this.customer = customer;
         this.teamSize = teamSize;

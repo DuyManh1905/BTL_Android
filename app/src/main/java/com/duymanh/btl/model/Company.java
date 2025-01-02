@@ -9,7 +9,7 @@ public class Company implements Serializable {
     private String desciption;
     private String size;
 
-    private int scale;
+    private String scale;
     private String stype;
 
     private String linkWebsite;
@@ -34,11 +34,11 @@ public class Company implements Serializable {
         this.imageCoverURL = imageCoverURL;
     }
 
-    public int getScale() {
+    public String getScale() {
         return scale;
     }
 
-    public void setScale(int scale) {
+    public void setScale(String scale) {
         this.scale = scale;
     }
 

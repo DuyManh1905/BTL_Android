@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.List;
 
 public class User implements Serializable {
-    private int id;
+    private Integer id;
+
+    private String avataURL;
     private String name;
     private String username;
     private String email;
@@ -13,8 +15,24 @@ public class User implements Serializable {
 
     private List<Cv> cvs;
 
-    public User(int id, String name, String username, String email, String birthdate, List<Role> roles, List<Cv> cvs) {
+    public User() {
+    }
+
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getAvataURL() {
+        return avataURL;
+    }
+
+    public void setAvataURL(String avataURL) {
+        this.avataURL = avataURL;
+    }
+
+    public User(Integer id, String avataURL, String name, String username, String email, String birthdate, List<Role> roles, List<Cv> cvs) {
+        this.id = id;
+        this.avataURL = avataURL;
         this.name = name;
         this.username = username;
         this.email = email;

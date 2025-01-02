@@ -1,10 +1,12 @@
 package com.duymanh.btl;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -44,6 +46,9 @@ public class CvActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cv);
 
+        getSupportActionBar().setTitle("Cv của bạn");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         initView();
 
         Retrofit retrofit = RetrofitClient.getClient("http://10.0.2.2:8081");
@@ -58,6 +63,16 @@ public class CvActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            // Trở về activity trước đó
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void initView() {
@@ -101,7 +116,7 @@ public class CvActivity extends AppCompatActivity {
                             diaChiUser.setText(cv.getProfile().getAddress());
                             fbUser.setText(cv.getProfile().getWebsite());
                         }
-                        if(cv.getEducations()!=null){
+                        if(cv.getEducations()!=null && cv.getEducations().size()>0){
                             String hocvan = "";
                             List<Educations> educations = cv.getEducations();
                             for(int i=0;i<educations.size();i++){
@@ -112,7 +127,7 @@ public class CvActivity extends AppCompatActivity {
                             }
                             hocVanUser.setText(hocvan);
                         }
-                        if(cv.getSkills()!=null){
+                        if(cv.getSkills()!=null && cv.getSkills().size()>0){
                             String skill = "";
                             List<Skills> skills = cv.getSkills();
                             for(int i=0;i<skills.size();i++){
@@ -121,7 +136,7 @@ public class CvActivity extends AppCompatActivity {
                             }
                             skillUser.setText(skill);
                         }
-                        if(cv.getExperiences()!=null){
+                        if(cv.getExperiences()!=null && cv.getExperiences().size()>0){
                             String experiences = "";
                             List<Experiences> list = cv.getExperiences();
                             for(int i=0;i<list.size();i++){
@@ -132,7 +147,7 @@ public class CvActivity extends AppCompatActivity {
                             }
                             experienceUser.setText(experiences);
                         }
-                        if(cv.getProjects()!=null){
+                        if(cv.getProjects()!=null && cv.getProjects().size()>0){
                             Project p = cv.getProjects().get(0);
                             soLuongNguoiThamGiaDuAn.setText(p.getTeamSize());
                             congNgheSuDungDuAn.setText(p.getTechnologies());
@@ -142,7 +157,7 @@ public class CvActivity extends AppCompatActivity {
                             tenDuAn.setText(p.getName());
                             thoiGanBatDauDuAn.setText(p.getStartAt());
                         }
-                        if(cv.getCertificates()!=null){
+                        if(cv.getCertificates()!=null && cv.getCertificates().size()>0){
                             String certi = "";
                             List<Certificates> list = cv.getCertificates();
                             for(int i=0;i<list.size();i++){
@@ -151,7 +166,7 @@ public class CvActivity extends AppCompatActivity {
                             }
                             chungChiUser.setText(certi);
                         }
-                        if(cv.getAwards()!=null){
+                        if(cv.getAwards()!=null && cv.getAwards().size()>0){
                             String award = "";
                             List<Awards> list = cv.getAwards();
                             for(int i=0;i<list.size();i++){
@@ -160,7 +175,7 @@ public class CvActivity extends AppCompatActivity {
                             }
                             giaiThuongUser.setText(award);
                         }
-                        if(cv.getHobbies()!=null){
+                        if(cv.getHobbies()!=null && cv.getHobbies().size()>0){
                             String hobbie = "";
                             List<Hobbies> list = cv.getHobbies();
                             for(int i=0;i<list.size();i++){
@@ -168,7 +183,7 @@ public class CvActivity extends AppCompatActivity {
                             }
                             soThichUser.setText(hobbie);
                         }
-                        if(cv.getIntroducers()!=null){
+                        if(cv.getIntroducers()!=null && cv.getIntroducers().size()>0){
                             String introducer = "";
                             List<Introducer> list = cv.getIntroducers();
                             for(int i=0;i<list.size();i++){
@@ -187,5 +202,12 @@ public class CvActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(CvActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 }
